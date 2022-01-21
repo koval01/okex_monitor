@@ -13,14 +13,22 @@ window.addEventListener("load", function () {
   }
   
   function build_table(json_body) {
-    return
+    const keys_ = Object.keys(json_body.data)
+    let array = []
+    for (var i = 0; i < keys_; i += 1) {
+      array.push(`
+        <div class="col themed-grid-col">${json_body.hint[keys_[i]]}</div>
+        <div class="col themed-grid-col">${json_body.data[keys_[i]]}</div>
+      `)
+    }
+    return array
   }
   
   function update_data() {
     request_json(function(data) {
       document.title = `OkxGrid | ${data.data.float_profit}`
-//       document.getElementById(
-//         "body_json").innerHTML = JSON.stringify(data, null, 5)
+      document.getElementById(
+        "data_body").innerHTML = build_table(data)
       document.getElementById(
         "last_update_stamp").innerHTML = new Date()
     })
