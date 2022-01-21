@@ -21,6 +21,8 @@ window.addEventListener("load", function () {
       document.title = `OkxGrid | ${data.data.float_profit}`
 //       document.getElementById(
 //         "body_json").innerHTML = JSON.stringify(data, null, 5)
+      document.getElementById(
+        "last_update_stamp").innerHTML = new Date()
     })
   }
   
