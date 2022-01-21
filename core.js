@@ -12,16 +12,17 @@ window.addEventListener("load", function () {
     req.send(null)
   }
   
-  function update_pre() {
+  function update_data() {
     request_json(function(data) {
+      document.title = `OkxGrid | ${data.data.float_profit}`
       document.getElementById(
         "body_json").innerHTML = JSON.stringify(data, null, 5)
     })
   }
   
   function init() {
-    update_pre()
-    setInterval(update_pre, 1000)
+    update_data()
+    setInterval(update_data, 1000)
   }
   
   // start working
