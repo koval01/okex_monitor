@@ -15,7 +15,7 @@ window.addEventListener("load", function () {
   function build_table(json_body) {
     const keys_ = Object.keys(json_body.data)
     let array_ = []
-    for (var i = 0; i < keys_; i += 1) {
+    for (var i = 0; i < keys_.length; i += 1) {
       array_.push(`
         <div class="col themed-grid-col">${json_body["hint"][keys_[i]]}</div>
         <div class="col themed-grid-col">${json_body["data"][keys_[i]]}</div>
