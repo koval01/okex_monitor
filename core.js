@@ -3,7 +3,7 @@ window.addEventListener("load", function () {
     const req = new XMLHttpRequest();
     req.responseType = "json"
     req.open(
-      "GET", "https://okex-spot-view.herokuapp.com", true
+      "GET", "https://okx-api.koval.page", true
     )
     req.onload  = function() {
        const jsonResponse = req.response
