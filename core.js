@@ -12,11 +12,15 @@ window.addEventListener("load", function () {
     req.send(null)
   }
   
+  function build_table(json_body) {
+    return
+  }
+  
   function update_data() {
     request_json(function(data) {
       document.title = `OkxGrid | ${data.data.float_profit}`
-      document.getElementById(
-        "body_json").innerHTML = JSON.stringify(data, null, 5)
+//       document.getElementById(
+//         "body_json").innerHTML = JSON.stringify(data, null, 5)
     })
   }
   
