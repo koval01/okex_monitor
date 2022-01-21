@@ -1,0 +1,28 @@
+window.addEventListener("load", function () {
+  function request_json(callback) {
+    const req = new XMLHttpRequest();
+    req.responseType = "json"
+    req.open(
+      "GET", "https://okex-spot-view.herokuapp.com", true
+    )
+    req.onload  = function() {
+       const jsonResponse = req.response
+       callback(jsonResponse)
+    };
+    req.send(null)
+  }
+  
+  function update_pre() {
+    request_json(function(data) {
+      document.getElementById("body_json").innerHTML = data
+    })
+  }
+  
+  function init() {
+    update_pre()
+    setInterval(update_pre, 1000)
+  }
+  
+  // start working
+  init()
+})
