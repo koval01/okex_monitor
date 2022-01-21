@@ -15,7 +15,7 @@ window.addEventListener("load", function () {
   function update_pre() {
     request_json(function(data) {
       document.getElementById(
-        "body_json").innerHTML = JSON.stringify(data)
+        "body_json").innerHTML = JSON.stringify(data, null, 5)
     })
   }
   
