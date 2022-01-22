@@ -16,8 +16,9 @@ window.addEventListener("load", function () {
   
   function get_time(time) {
     return time.toLocaleDateString("ua", {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
-      hour: 'numeric', minute: 'numeric', second: 'numeric'
+      year: 'numeric', month: 'numeric',
+      day: 'numeric', hour: 'numeric',
+      minute: 'numeric', second: 'numeric'
     })
   }
   
