@@ -35,7 +35,7 @@ window.addEventListener("load", function () {
   
   function init() {
     update_data()
-    setInterval(update_data, 1000)
+    setInterval(update_data, 800)
   }
   
   // start working
