@@ -19,7 +19,10 @@ window.addEventListener("load", function () {
       if ([
         "created_at_utc"
       ].indexOf(keys_[i]) > -1) {
-        json_body["data"][keys_[i]] = new Date(json_body["data"][keys_[i]])
+        json_body["data"][keys_[i]] = new Date(json_body["data"][keys_[i]]).toLocaleDateString("ua", {
+          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
+          hour: 'numeric', minute: 'numeric', second: 'numeric'
+        })
       }
       let name_ = `<div class="col themed-grid-col">${json_body["hint"][keys_[i]]}</div>`
       let varb_ = `<div class="col themed-grid-col">${json_body["data"][keys_[i]]}</div>`
