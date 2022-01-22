@@ -47,7 +47,6 @@ window.addEventListener("load", function () {
       } else {
         status_ = `<div class="col themed-grid-col">Продаж</div>`
       }
-      // let id_ = `<div class="col themed-grid-col">${lines_[i]["trade_id"]}</div>`
       let time_ = `<div class="col themed-grid-col">${lines_[i]["trade_time"]}</div>`
       let profit_ = `<div class="col themed-grid-col">${lines_[i]["profit"]}</div>`
       let profituah_ = `<div class="col themed-grid-col">${lines_[i]["profit_uah"]}</div>`
@@ -64,7 +63,7 @@ window.addEventListener("load", function () {
       document.getElementById(
         "trade_body").innerHTML = build_trades_table(data)
       document.getElementById(
-        "last_update_stamp").innerHTML = get_time(null)
+        "last_update_stamp").innerHTML = get_time(undefined)
     })
   }
   
