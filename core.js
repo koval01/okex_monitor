@@ -1,18 +1,4 @@
 window.addEventListener("load", function () {
-  function request_json(callback) {
-    const req = new XMLHttpRequest()
-    req.responseType = "json"
-    req.open(
-      "POST", "https://okx-api.koval.page", true
-    )
-    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
-    req.onload  = function() {
-       const jsonResponse = req.response
-       callback(jsonResponse)
-    }
-    req.send(null)
-  }
-  
   function get_time(time) {
     return time.toLocaleDateString("ua", {
       year: 'numeric', month: 'numeric',
@@ -65,7 +51,7 @@ window.addEventListener("load", function () {
     return array_
   }
   
-  function update_data() {
+  function update_data(data) {
     request_json(function(data) {
       document.title = `OkxGrid | ${data.data.float_profit}`
       document.getElementById(
@@ -74,6 +60,16 @@ window.addEventListener("load", function () {
         "trade_body").innerHTML = build_trades_table(data)
       document.getElementById(
         "last_update_stamp").innerHTML = get_time(new Date())
+    })
+  }
+  
+  function socket_() {
+    var socket = io.connect('https://okx-api.koval.page')
+    socket.on('connect', function() {
+      socket.send('connected')
+    })
+    socket.on('data', function(msg) {
+      update_data(msg)
     })
   }
   
