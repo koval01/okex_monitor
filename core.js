@@ -47,11 +47,11 @@ window.addEventListener("load", function () {
       } else {
         status_ = `<div class="col themed-grid-col">Продаж</div>`
       }
-      let id_ = `<div class="col themed-grid-col">${lines_[i]["trade_id"]}</div>`
+      // let id_ = `<div class="col themed-grid-col">${lines_[i]["trade_id"]}</div>`
       let time_ = `<div class="col themed-grid-col">${lines_[i]["trade_time"]}</div>`
       let profit_ = `<div class="col themed-grid-col">${lines_[i]["profit"]}</div>`
       let profituah_ = `<div class="col themed-grid-col">${lines_[i]["profit_uah"]}</div>`
-      array_ = array_+id_+time_+profit_+profituah_+status_
+      array_ = array_+time_+profit_+profituah_+status_
     }
     return array_
   }
