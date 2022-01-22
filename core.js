@@ -16,9 +16,14 @@ window.addEventListener("load", function () {
     const keys_ = Object.keys(json_body.data)
     let array_ = ""
     for (var i = 0; i < keys_.length; i += 1) {
-      array_ = array_+`
-        <div class="col themed-grid-col">${json_body["hint"][keys_[i]]}</div>
-        <div class="col themed-grid-col">${json_body["data"][keys_[i]]}</div>`
+      if ([
+        "created_at_utc"
+      ].indexOf(keys_[i]) > -1) {
+        json_body["data"][keys_[i]] = new Date(json_body["data"][keys_[i]])
+      }
+      let name_ = `<div class="col themed-grid-col">${json_body["hint"][keys_[i]]}</div>`
+      let varb_ = `<div class="col themed-grid-col">${json_body["data"][keys_[i]]}</div>`
+      array_ = array_+name_+varb_
     }
     return array_
   }
