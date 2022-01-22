@@ -52,19 +52,17 @@ window.addEventListener("load", function () {
   }
   
   function update_data(data) {
-    request_json(function(data) {
-      document.title = `OkxGrid | ${data.data.float_profit}`
-      document.getElementById(
-        "data_body").innerHTML = build_table(data)
-      document.getElementById(
-        "trade_body").innerHTML = build_trades_table(data)
-      document.getElementById(
-        "last_update_stamp").innerHTML = get_time(new Date())
-    })
+    document.title = `OkxGrid | ${data.data.float_profit}`
+    document.getElementById(
+      "data_body").innerHTML = build_table(data)
+    document.getElementById(
+      "trade_body").innerHTML = build_trades_table(data)
+    document.getElementById(
+      "last_update_stamp").innerHTML = get_time(new Date())
   }
   
   function socket_() {
-    var socket = io.connect('https://okx-api.koval.page')
+    const socket = io.connect('https://okx-api.koval.page')
     socket.on('connect', function() {
       socket.send('connected')
     })
