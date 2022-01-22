@@ -73,11 +73,6 @@ window.addEventListener("load", function () {
     })
   }
   
-  function init() {
-    update_data()
-    setInterval(update_data, 1600)
-  }
-  
   // start working
-  init()
+  socket_()
 })
