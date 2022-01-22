@@ -35,6 +35,12 @@ window.addEventListener("load", function () {
     const lines_ = json_body.trades
     let array_ = "", status_ = ""
     for (var i = 0; i < lines_.length; i += 1) {
+      lines_[i]["trade_time"] = new Date(
+        lines_[i]["trade_time"]
+      ).toLocaleDateString("ua", {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
+        hour: 'numeric', minute: 'numeric', second: 'numeric'
+      })
       if (!lines_[i]["profit"] && !lines_[i]["profit_uah"]) {
         lines_[i]["profit"] = "-"
         lines_[i]["profit_uah"] = "-"
