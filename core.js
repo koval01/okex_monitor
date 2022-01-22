@@ -34,7 +34,10 @@ window.addEventListener("load", function () {
       document.getElementById(
         "data_body").innerHTML = build_table(data)
       document.getElementById(
-        "last_update_stamp").innerHTML = new Date()
+        "last_update_stamp").innerHTML = new Date().toLocaleDateString("ua", {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
+        hour: 'numeric', minute: 'numeric', second: 'numeric'
+      })
     })
   }
   
