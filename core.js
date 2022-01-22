@@ -12,6 +12,13 @@ window.addEventListener("load", function () {
     req.send(null)
   }
   
+  function get_time(time) {
+    return new Date(time).toLocaleDateString("ua", {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
+      hour: 'numeric', minute: 'numeric', second: 'numeric'
+    })
+  }
+  
   function build_table(json_body) {
     const keys_ = Object.keys(json_body.data)
     let array_ = ""
@@ -19,10 +26,7 @@ window.addEventListener("load", function () {
       if ([
         "created_at_utc"
       ].indexOf(keys_[i]) > -1) {
-        json_body["data"][keys_[i]] = new Date(json_body["data"][keys_[i]]).toLocaleDateString("ua", {
-          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
-          hour: 'numeric', minute: 'numeric', second: 'numeric'
-        })
+        json_body["data"][keys_[i]] = get_time(json_body["data"][keys_[i]])
       }
       let name_ = `<div class="col themed-grid-col">${json_body["hint"][keys_[i]]}</div>`
       let varb_ = `<div class="col themed-grid-col">${json_body["data"][keys_[i]]}</div>`
@@ -35,12 +39,7 @@ window.addEventListener("load", function () {
     const lines_ = json_body.trades
     let array_ = "", status_ = ""
     for (var i = 0; i < lines_.length; i += 1) {
-      lines_[i]["trade_time"] = new Date(
-        lines_[i]["trade_time"]
-      ).toLocaleDateString("ua", {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
-        hour: 'numeric', minute: 'numeric', second: 'numeric'
-      })
+      lines_[i]["trade_time"] = get_time(lines_[i]["trade_time"])
       if (!lines_[i]["profit"] && !lines_[i]["profit_uah"]) {
         lines_[i]["profit"] = "-"
         lines_[i]["profit_uah"] = "-"
@@ -65,10 +64,7 @@ window.addEventListener("load", function () {
       document.getElementById(
         "trade_body").innerHTML = build_trades_table(data)
       document.getElementById(
-        "last_update_stamp").innerHTML = new Date().toLocaleDateString("ua", {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
-        hour: 'numeric', minute: 'numeric', second: 'numeric'
-      })
+        "last_update_stamp").innerHTML = get_time(null)
     })
   }
   
