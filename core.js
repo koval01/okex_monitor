@@ -1,23 +1,17 @@
 window.addEventListener("load", function () {
-  function request_json(callback) {
-    grecaptcha.ready(function () {
-      grecaptcha.execute(
-        "6LdJvy0eAAAAAAtszgbp8yj2beqgAV59w3JfZ08y", 
-        {action: "submit"}).then(function (re_token) {
-        const req = new XMLHttpRequest()
-        req.responseType = "json"
-        req.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
-        req.open(
-          "POST", "https://okx-api.koval.page", true
-        )
-        req.send(JSON.stringify({"re_token": re_token}))
-        req.onload  = function() {
-           const jsonResponse = req.response
-           callback(jsonResponse)
-        }
-        req.send(null)
-      })
-    })
+  function request_json(callback, re_token) {
+    const req = new XMLHttpRequest()
+    req.responseType = "json"
+    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+    req.open(
+      "POST", "https://okx-api.koval.page", true
+    )
+    req.send(JSON.stringify({"re_token": re_token}))
+    req.onload  = function() {
+       const jsonResponse = req.response
+       callback(jsonResponse)
+    }
+    req.send(null)
   }
   
   function get_time(time) {
@@ -64,14 +58,20 @@ window.addEventListener("load", function () {
   }
   
   function update_data() {
-    request_json(function(data) {
-      document.title = `OkxGrid | ${data.data.float_profit}`
-      document.getElementById(
-        "data_body").innerHTML = build_table(data)
-      document.getElementById(
-        "trade_body").innerHTML = build_trades_table(data)
-      document.getElementById(
-        "last_update_stamp").innerHTML = get_time(new Date())
+    grecaptcha.ready(function () {
+      grecaptcha.execute(
+        "6LdJvy0eAAAAAAtszgbp8yj2beqgAV59w3JfZ08y", 
+        {action: "submit"}).then(function (re_token) {
+        request_json(function(data) {
+          document.title = `OkxGrid | ${data.data.float_profit}`
+          document.getElementById(
+            "data_body").innerHTML = build_table(data)
+          document.getElementById(
+            "trade_body").innerHTML = build_trades_table(data)
+          document.getElementById(
+            "last_update_stamp").innerHTML = get_time(new Date())
+        }, re_token)
+      })
     })
   }
   
