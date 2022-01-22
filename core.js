@@ -35,17 +35,17 @@ window.addEventListener("load", function () {
     const lines_ = json_body.trades
     let array_ = "", status_ = ""
     for (var i = 0; i < lines_.length; i += 1) {
-      if (!json_body[i]["profit"] && !json_body[i]["profit_uah"]) {
-        json_body[i]["profit"] = "-"
-        json_body[i]["profit_uah"] = "-"
+      if (!lines_[i]["profit"] && !lines_[i]["profit_uah"]) {
+        lines_[i]["profit"] = "-"
+        lines_[i]["profit_uah"] = "-"
         status_ = `<div class="col themed-grid-col">Купівля</div>`
       } else {
         status_ = `<div class="col themed-grid-col">Продаж</div>`
       }
-      let id_ = `<div class="col themed-grid-col">${json_body[i]["trade_id"]}</div>`
-      let time_ = `<div class="col themed-grid-col">${json_body[i]["trade_time"]}</div>`
-      let profit_ = `<div class="col themed-grid-col">${json_body[i]["profit"]}</div>`
-      let profituah_ = `<div class="col themed-grid-col">${json_body[i]["profit_uah"]}</div>`
+      let id_ = `<div class="col themed-grid-col">${lines_[i]["trade_id"]}</div>`
+      let time_ = `<div class="col themed-grid-col">${lines_[i]["trade_time"]}</div>`
+      let profit_ = `<div class="col themed-grid-col">${lines_[i]["profit"]}</div>`
+      let profituah_ = `<div class="col themed-grid-col">${lines_[i]["profit_uah"]}</div>`
       array_ = array_+id_+time_+profit_+profituah_+status_
     }
     return array_
