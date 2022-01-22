@@ -2,10 +2,10 @@ window.addEventListener("load", function () {
   function request_json(callback, re_token) {
     const req = new XMLHttpRequest()
     req.responseType = "json"
-    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
     req.open(
       "POST", "https://okx-api.koval.page", true
     )
+    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
     req.send(JSON.stringify({"re_token": re_token}))
     req.onload  = function() {
        const jsonResponse = req.response
