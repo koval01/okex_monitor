@@ -32,7 +32,7 @@ window.addEventListener("load", function () {
   }
   
   function build_trades_table(json_body) {
-    const lines_ = json_body.data
+    const lines_ = json_body.trades
     let array_ = "", status_ = ""
     for (var i = 0; i < lines_.length; i += 1) {
       if (!json_body[i]["profit"] && !json_body[i]["profit_uah"]) {
