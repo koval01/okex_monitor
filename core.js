@@ -13,7 +13,8 @@ window.addEventListener("load", function () {
       console.log(data[i])
       let first_el_modify = ""
       if (!following) { first_el_modify = "style=\"border-top:0\"" }
-      result+`<div class="col themed-grid-col" ${first_el_modify}>${data[i]}</div>`
+      result = result+`<div class="col themed-grid-col" 
+      ${first_el_modify}>${data[i]}</div>`
     }
     return result
   }
