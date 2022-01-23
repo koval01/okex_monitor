@@ -7,12 +7,12 @@ window.addEventListener("load", function () {
     })
   }
   
-  function line_builder(data, following = true) {
+  function line_builder(data, not_first = false) {
     var result = ""
     for (var i = 0; i < data.length; i += 1) {
       console.log(data[i])
       let first_el_modify = ""
-      if (!following) { first_el_modify = "style=\"border-top:0\"" }
+      if (not_first) { first_el_modify = "style=\"border-top:0\"" }
       result = result+`<div class="col themed-grid-col" 
       ${first_el_modify}>${data[i]}</div>`
     }
