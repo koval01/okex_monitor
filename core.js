@@ -9,6 +9,7 @@ window.addEventListener("load", function () {
   
   function line_builder(data, following = true) {
     var result = ""
+    console.log(data)
     for (var i = 0; i < data.length; i += 1) {
       let first_el_modify = ""
       if (!following) { first_el_modify = "style=\"border-top:0\"" }
