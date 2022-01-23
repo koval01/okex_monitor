@@ -52,7 +52,7 @@ window.addEventListener("load", function () {
   }
   
   function update_data(data) {
-    data = JSON.parse(JSON.stringify(data)).data
+    data = data.data
     document.title = `OkxGrid | ${data.data.float_profit}`
     document.getElementById(
       "data_body").innerHTML = build_table(data)
@@ -69,7 +69,7 @@ window.addEventListener("load", function () {
     })
     socket.on('message', function(msg, cb) {
       console.log(msg)
-      console.log(cb)
+      if (msg.data == "Connected") { return }
       update_data(msg)
     })
   }
