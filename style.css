@@ -46,3 +46,6 @@ body {
 .table_head {
   padding-left: 0.7em;
 }
+.container {
+  padding: 8% !important;
+}
