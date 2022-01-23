@@ -52,6 +52,7 @@ window.addEventListener("load", function () {
   }
   
   function update_data(data) {
+    data = JSON.parse(JSON.stringify(data))
     document.title = `OkxGrid | ${data.data.float_profit}`
     document.getElementById(
       "data_body").innerHTML = build_table(data)
