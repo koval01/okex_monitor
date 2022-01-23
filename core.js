@@ -67,7 +67,7 @@ window.addEventListener("load", function () {
     socket.on('connect', function() {
       socket.emit('data_event', {data: 'I\'m connected!'});
     })
-    socket.on('message', function(msg, cb) {
+    socket.on('data_event', function(msg, cb) {
       console.log(msg)
       if (msg.data == "Connected" || msg.data == "I'm connected!") { return }
       update_data(msg)
