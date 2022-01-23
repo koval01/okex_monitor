@@ -69,7 +69,7 @@ window.addEventListener("load", function () {
     })
     socket.on('message', function(msg, cb) {
       console.log(msg)
-      if (msg.data == "Connected") { return }
+      if (msg.data == "Connected" && msg.data == "I'm connected!") { return }
       update_data(msg)
     })
   }
