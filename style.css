@@ -18,7 +18,7 @@
 }
 .col {
   padding-right: 5px;
-  padding-left: 5px;
+  padding-left: 0.1em;
 }
 hr {
   border-color: rgba(99, 99, 102);
