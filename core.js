@@ -1,9 +1,9 @@
 window.addEventListener("load", function () {
   function get_time(time) {
     return time.toLocaleDateString("ua", {
-      year: 'numeric', month: 'numeric',
-      day: 'numeric', hour: 'numeric',
-      minute: 'numeric', second: 'numeric'
+      year: "numeric", month: "numeric",
+      day: "numeric", hour: "numeric",
+      minute: "numeric", second: "numeric"
     })
   }
   
@@ -65,11 +65,11 @@ window.addEventListener("load", function () {
   }
   
   function socket_() {
-    const socket = io.connect('https://okx-api.koval.page')
-    socket.on('connect', function() {
-      socket.emit('data_event', {data: 'I\'m connected!'});
+    const socket = io.connect("https://okx-api.koval.page")
+    socket.on("connect", function() {
+      socket.emit("data_event", {data: "I'm connected!"});
     })
-    socket.on('message', function(msg, cb) {
+    socket.on("message", function(msg, cb) {
       console.log(msg)
       if (msg.data == "Connected" || msg.data == "I'm connected!") { return }
       update_data(msg)
