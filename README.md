@@ -1,3 +1,3 @@
 # okex_monitor
 
-Front-end - <a href="https://github.com/koval01/okex_monitor">github.com/koval01/okex_monitor</a>
+Back-end - <a href="https://github.com/koval01/okex_spot_viewer">github.com/koval01/okex_spot_viewer</a>
