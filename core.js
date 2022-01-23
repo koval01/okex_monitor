@@ -66,7 +66,7 @@ window.addEventListener("load", function () {
     socket.on('connect', function() {
       socket.send('connected')
     })
-    socket.on('data', function(msg) {
+    socket.on('message', function(msg) {
       update_data(msg)
     })
   }
