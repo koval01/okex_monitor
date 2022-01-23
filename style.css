@@ -37,3 +37,6 @@ body {
   white-space: nowrap; 
   overflow: scroll;
 }
+.text_table_pos {
+  margin-left: -10px !important;
+}
