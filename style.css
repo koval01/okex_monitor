@@ -14,7 +14,7 @@
   padding-top: .25rem !important;
   padding-bottom: .25rem !important;
   background-color: rgba(0, 0, 0, 0) !important;
-  border: 1px solid rgba(99, 99, 102) !important;
+  border-top: 1px solid rgba(99, 99, 102) !important;
 }
 /* .themed-container {
   padding: .75rem;
