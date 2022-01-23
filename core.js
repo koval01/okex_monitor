@@ -65,10 +65,11 @@ window.addEventListener("load", function () {
   function socket_() {
     const socket = io.connect('https://okx-api.koval.page')
     socket.on('connect', function() {
-      socket.send('connected')
+      socket.emit('data_event', {data: 'I\'m connected!'});
     })
-    socket.on('message', function(msg) {
+    socket.on('message', function(msg, cb) {
       update_data(msg)
+      console.log(cb)
     })
   }
   
