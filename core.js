@@ -30,7 +30,7 @@ window.addEventListener("load", function () {
       }
       array_ = array_+line_builder([
         json_body["hint"][keys_[i]], json_body["data"][keys_[i]]
-      ], !keys_[i])
+      ], !i)
     }
     return array_
   }
@@ -50,7 +50,7 @@ window.addEventListener("load", function () {
       array_ = array_+line_builder([
         lines_[i]["trade_time"], lines_[i]["profit"],
         lines_[i]["profit_uah"], status_
-      ], !lines_[i])
+      ], !i)
     }
     return array_
   }
