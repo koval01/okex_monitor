@@ -33,3 +33,7 @@ body {
   background:#2c2c2e !important;
   color:#e5e5ea !important;
 }
+.oneline_text {
+  white-space: nowrap; 
+  overflow: scroll;
+}
