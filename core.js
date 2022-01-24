@@ -125,8 +125,7 @@ window.addEventListener("load", (function() {
                 data: "I'm connected!"
             })
         }))
-        socket.on("message", (function(msg, cb) {
-            console.log(msg)
+        socket.on("message", (function(msg) {
             if (msg.data == "Connected" || msg.data == "I'm connected!") {
                 return
             }
