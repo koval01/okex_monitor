@@ -1,117 +1,40 @@
 window.addEventListener("load", (function() {
     function timeAgoConvert(date) {
-        let seconds = Math.floor((new Date() - date) / 1000)
-        let interval = seconds / 31536000
-        let re = null
+        const seconds = Math.floor((new Date() - date) / 1000)
+        var interval = seconds / 31536000
+        // internal function
+        function builder(data, interval) {
+            if (interval > 1) {
+                const time_ = Math.floor(interval)
+                function sstr(data, val) { return parseInt(data.toString().substr(val)) }
+                let one_l = sstr(time_, -1), two_l = sstr(time_, -2)
 
-        if (interval > 1) {
-            time_ = Math.floor(interval)
-            one_l = parseInt(time_.toString().substr(-1))
-            two_l = parseInt(time_.toString().substr(-2))
-
-            if (one_l === 1 && two_l < 11) {
-                return 'рік'
-            } else if (two_l > 20 && one_l === 1) {
-                return time_ + ' рік'
-            } else if (two_l > 20 && one_l > 1 && one_l < 5) {
-                return time_ + ' роки'
-            } else if (5 > one_l && one_l > 1 && two_l < 11) {
-                return time_ + ' роки'
-            } else {
-                return time_ + ' років'
+                if ((one_l === 1 && two_l < 11) || (two_l > 20 && one_l === 1)) {
+                    return data[0]
+                } else if ((two_l > 20 && one_l > 1 && one_l < 5) || (5 > one_l && one_l > 1 && two_l < 11)) {
+                    return time_ + ` ${data[1]}`
+                } else { return time_ + ` ${data[2]}` }
             }
         }
-
-        interval = seconds / 2592000
-        if (interval > 1) {
-            time_ = Math.floor(interval)
-            one_l = parseInt(time_.toString().substr(-1))
-            two_l = parseInt(time_.toString().substr(-2))
-
-            if (one_l === 1 && two_l < 11) {
-                return 'місяць'
-            } else if (two_l > 20 && one_l === 1) {
-                return time_ + ' місяць'
-            } else if (two_l > 20 && one_l > 1 && one_l < 5) {
-                return time_ + ' місяці'
-            } else if (5 > one_l && one_l > 1 && two_l < 11) {
-                return time_ + ' місяці'
-            } else {
-                return time_ + ' місяців'
-            }
-        }
-
-        interval = seconds / 86400
-        if (interval > 1) {
-            time_ = Math.floor(interval)
-            one_l = parseInt(time_.toString().substr(-1))
-            two_l = parseInt(time_.toString().substr(-2))
-
-            if (one_l === 1 && two_l < 11) {
-                return 'день'
-            } else if (two_l > 20 && one_l === 1) {
-                return time_ + ' день'
-            } else if (two_l > 20 && one_l > 1 && one_l < 5) {
-                return time_ + ' дні'
-            } else if (5 > one_l && one_l > 1 && two_l < 11) {
-                return time_ + ' дні'
-            } else {
-                return time_ + ' днів'
-            }
-        }
-
-        interval = seconds / 3600
-        if (interval > 1) {
-            time_ = Math.floor(interval)
-            one_l = parseInt(time_.toString().substr(-1))
-            two_l = parseInt(time_.toString().substr(-2))
-
-            if (one_l === 1 && two_l < 11) {
-                return 'годину'
-            } else if (two_l > 20 && one_l === 1) {
-                return time_ + ' годину'
-            } else if (two_l > 20 && one_l > 1 && one_l < 5) {
-                return time_ + ' години'
-            } else if (5 > one_l && one_l > 1 && two_l < 11) {
-                return time_ + ' години'
-            } else {
-                return time_ + ' годин'
-            }
-        }
-
-        interval = seconds / 60
-        if (interval > 1) {
-            time_ = Math.floor(interval)
-            one_l = parseInt(time_.toString().substr(-1))
-            two_l = parseInt(time_.toString().substr(-2))
-
-            if (one_l === 1 && two_l < 11) {
-                return 'хвилину'
-            } else if (two_l > 20 && one_l === 1) {
-                return time_ + ' хвилину'
-            } else if (two_l > 20 && one_l > 1 && one_l < 5) {
-                return time_ + ' хвилини'
-            } else if (5 > one_l && one_l > 1 && two_l < 11) {
-                return time_ + ' хвилини'
-            } else {
-                return time_ + ' хвилин'
-            }
-        }
-
-        time_ = Math.floor(seconds)
-        one_l = parseInt(time_.toString().substr(-1))
-        two_l = parseInt(time_.toString().substr(-2))
-
-        if (one_l === 1 && two_l < 11) {
-            return 'секунду'
-        } else if (two_l > 20 && one_l === 1) {
-            return time_ + ' секунду'
-        } else if (two_l > 20 && one_l > 1 && one_l < 5) {
-            return time_ + ' секунди'
-        } else if (5 > one_l && one_l > 1 && two_l < 11) {
-            return time_ + ' секунди'
-        } else {
-            return time_ + ' секунд'
+        const data = [
+            {interval: interval, pattern: [
+                "рік", "роки", "років"
+            ]},
+            {interval: seconds / 2592000, pattern: [
+                "місяць", "місяці", "місяців"
+            ]},
+            {interval: seconds / 86400, pattern: [
+                "день", "дні", "днів"
+            ]},
+            {interval: seconds / 3600, pattern: [
+                "годину", "години", "годин"
+            ]},
+            {interval: seconds / 60, pattern: [
+                "хвилину", "хвилини", "хвилин"
+            ]}
+        ]
+        for (var i = 0; i < data.length; i += 1) {
+            return builder(data[i].pattern, data[i].interval)
         }
     }
 
