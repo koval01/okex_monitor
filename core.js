@@ -74,9 +74,10 @@ window.addEventListener("load", (function() {
         const keys_ = Object.keys(json_body.data)
         var array_ = ""
         // internal function
-        function currency_calculate(keys_data, data) {
+        function currency_calculate(keys_data, data, currency_srv) {
             for (var i = 0; i < keys_data.length; i += 1) {
-                data[keys_data[i]] = currency_process(data[keys_data[i]])
+                data[keys_data[i]] = currency_process(
+                    data[keys_data[i]], currency_srv)
             }
             return data
         }
@@ -84,20 +85,20 @@ window.addEventListener("load", (function() {
             if ([
             "created_at_utc"
             ].indexOf(keys_[i]) > -1) {
-                json_body["data"][keys_[i]] = get_time(
-                new Date(json_body["data"][keys_[i]]))
+                json_body.data[keys_[i]] = get_time(
+                new Date(json_body.data[keys_[i]]))
             }
             if ([
             "was_launched"
             ].indexOf(keys_[i]) > -1) {
-                json_body["data"][keys_[i]] = `${timeAgoConvert(json_body["data"][keys_[i]])} тому`
+                json_body.data[keys_[i]] = `${timeAgoConvert(json_body.data[keys_[i]])} тому`
             }
-            json_body["data"] = currency_calculate([
+            json_body.data = currency_calculate([
                 "annualized_rate", "profit", "current_price", "float_profit",
                 "total_price", "run-price"
-            ], json_body["data"])
+            ], json_body.data, json_body.currency)
             array_ = array_ + line_builder([
-            json_body["hint"][keys_[i]], json_body["data"][keys_[i]]
+            json_body.hint[keys_[i]], json_body.data[keys_[i]]
             ], !i)
         }
         return array_
@@ -111,7 +112,8 @@ window.addEventListener("load", (function() {
             lines_[i]["trade_time"] = get_time(
             new Date(lines_[i]["trade_time"])
             )
-            lines_[i]["profit"] = currency_process(lines_[i]["profit"])
+            lines_[i]["profit"] = currency_process(
+                lines_[i]["profit"], json_body.currency)
             if (!lines_[i]["profit"]) {
                 lines_[i]["profit"] = "-"
                 status_ = "Купівля"
