@@ -156,7 +156,8 @@ window.addEventListener("load", (function() {
 
     function update_data(data) {
         data = data.data
-        document.title = `OkxGrid | ${data.data.float_profit}`
+        document.title = `OkxGrid | ${currency_process(
+            data.data.float_profit, data.currency)}`
         document.getElementById(
         "data_body").innerHTML = build_table(data)
         document.getElementById(
