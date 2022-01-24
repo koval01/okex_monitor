@@ -70,7 +70,7 @@ a:active {
   justify-content: center;
 }
 .header-menu {
-  display: flex;
+  display: flex !important;
   justify-content: space-between;
   align-items: center;
   font-size: 15px;
@@ -79,19 +79,19 @@ a:active {
   color: #fff;
   text-transform: uppercase;
   padding: 0;
-  margin-top: 15px!important;
+  margin-top: 15px !important;
 }
 .header-menu-item {
-  position: relative;
-  cursor: pointer;
+  position: relative !important;
+  cursor: pointer !important;
 }
 .link_header_ {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline;
-  text-decoration: none;
-  margin: 5px;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  vertical-align: baseline !important;
+  text-decoration: none !important;
+  margin: 5px !important;
 }
 ol, ul {
   list-style: none;
