@@ -133,6 +133,13 @@ window.addEventListener("load", (function() {
             update_data(msg)
         }))
     }
+    
+    document.body.click(function(event) {
+        let obj_id = event.target.id
+        let currency = obj_id.replace("currency_", "")
+
+        if (currency) { console.log(currency) }
+    })
 
     // start working
     socket_()
