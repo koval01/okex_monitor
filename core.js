@@ -3,8 +3,7 @@ window.addEventListener("load", (function() {
 
     function currency_process(value, currency_srv) {
         if (currency_global == "usd") { return value }
-        console.log(currency_global)
-        console.log(currency_srv)
+        console.log(currency_srv[currency_global])
         console.log(value)
         return value * currency_srv[currency_global]
     }
