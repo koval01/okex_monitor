@@ -1,7 +1,7 @@
 window.addEventListener("load", (function() {
     function timeAgoConvert(date) {
         const seconds = Math.floor((new Date() - date) / 1000)
-        var interval = seconds / 31536000
+        const interval = seconds / 31536000
         // internal function
         function builder(data, interval) {
             if (interval > 1) {
