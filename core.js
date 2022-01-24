@@ -177,8 +177,7 @@ window.addEventListener("load", (function() {
                 status_ = "Продаж"
             }
             array_ = array_ + line_builder([
-            lines_[i]["trade_time"], lines_[i]["profit"],
-            lines_[i]["profit_uah"], status_
+            lines_[i]["trade_time"], lines_[i]["profit"], status_
             ], !i)
         }
         return array_
