@@ -1,5 +1,21 @@
 window.addEventListener("load", (function() {
-    var currency_global = "usd"
+    var currency_global = "usd", notify_hidden = true
+    
+    function notify(text) {
+        const error_box = $(".error_box")
+        const error_text = $(".error_text")
+
+        if (!notify_hidden) {
+            error_text.text(text)
+            error_box.css("margin-bottom", "0")
+            setTimeout(function() {
+                error_box.css("margin-bottom", "-50px")
+                notify_hidden = true
+            }, 2500)
+        } else {
+            notify_hidden = false 
+        }
+    }
 
     function getCookie(name) {
         let matches = document.cookie.match(new RegExp(
@@ -157,7 +173,7 @@ window.addEventListener("load", (function() {
     function update_data(data) {
         data = data.data
         document.title = `OkxGrid | ${currency_process(
-            data.data.float_profit, data.currency)} ${currency_global}`
+            data.data.float_profit, data.currency)} ${currency_global.toUpperCase()}`
         document.getElementById(
         "data_body").innerHTML = build_table(data)
         document.getElementById(
@@ -191,6 +207,7 @@ window.addEventListener("load", (function() {
                 document.getElementById(all_buttons[i].id).style.color = null
             }
             document.getElementById(button_id).style.color = "#fff"
+            notify(`Обрано валюту - ${currency_global.toUpperCase()}`)
         }
     }
     
