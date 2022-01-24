@@ -3,7 +3,7 @@ window.addEventListener("load", (function() {
 
     function currency_process(value, currency_srv) {
         if (currency_global == "usd") { return value }
-        return value * currency_srv
+        return value * currency_srv[currency_global]
     }
 
     function timeAgoConvert(date) {
