@@ -137,8 +137,7 @@ window.addEventListener("load", (function() {
     document.body.click(function(event) {
         let obj_id = event.target.id
         let currency = obj_id.replace("currency_", "")
-
-        if (currency) { console.log(currency) }
+        if (currency.length) { console.log(currency) }
     })
 
     // start working
