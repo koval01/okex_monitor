@@ -130,7 +130,7 @@ li {
 ::-webkit-scrollbar-thumb {
   background: #939393;
   border-radius: 8px;
-  border: 4px solid #0e0e10;
+  border: 4px solid #2c2c2e;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #7c7c7c;
