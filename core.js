@@ -1,6 +1,30 @@
 window.addEventListener("load", (function() {
     var currency_global = "usd"
 
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ))
+        return matches ? decodeURIComponent(matches[1]) : undefined
+    }
+
+    function setCookie(name, value, options = {}) {
+        if (options.expires instanceof Date) {
+            options.expires = options.expires.toUTCString()
+        }
+      
+        let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value)
+      
+        for (let optionKey in options) {
+            updatedCookie += "; " + optionKey
+            let optionValue = options[optionKey]
+            if (optionValue !== true) {
+                updatedCookie += "=" + optionValue
+            }
+        }
+        document.cookie = updatedCookie
+    }
+
     function currency_process(value, currency_srv) {
         if (currency_global == "usd") { return value }
         return (value * currency_srv[currency_global]).toFixed(3)
@@ -158,10 +182,17 @@ window.addEventListener("load", (function() {
     
     document.body.addEventListener('click', function(event) {
         const currency = event.target.id.replace("currency_", "")
-        if (currency.length) { currency_global = currency }
+        if (currency.length) { 
+            currency_global = currency
+            setCookie("currency", currency)
+        }
     }, true)
 
     // start working
+    currency_cookie = getCookie("currency")
+    if (currency_cookie) { 
+        currency_global = currency_cookie 
+    }
     socket_()
 }))
 
