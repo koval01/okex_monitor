@@ -49,3 +49,18 @@ body {
 .container {
   padding: 8% !important;
 }
+.currency_button {
+  color: #a6a6a6;
+}
+.currency_button:visited {
+  color: #545454;
+}
+.currency_button:focus {
+  color: #ececec;
+}
+.currency_button:hover {
+  color: #ececec;
+}
+.currency_button:active {
+  color: #cfcfcf;
+}
