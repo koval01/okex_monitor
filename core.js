@@ -3,12 +3,7 @@ window.addEventListener("load", (function() {
 
     function currency_process(value, currency_srv) {
         if (currency_global == "usd") { return value }
-        console.log(currency_global)
-        console.log(value)
-        console.log(currency_srv)
-        console.log(currency_srv[currency_global])
-        console.log(parseInt(currency_srv[currency_global]))
-        return value * parseInt(currency_srv[currency_global])
+        return value * currency_srv[currency_global]
     }
 
     function timeAgoConvert(date) {
@@ -77,7 +72,7 @@ window.addEventListener("load", (function() {
 
     function build_table(json_body) {
         const keys_ = Object.keys(json_body.data)
-        var array_ = ""
+        var array_ = "", currency_update = false
         // internal function
         function currency_calculate(keys_data, data, currency_srv) {
             for (var i = 0; i < keys_data.length; i += 1) {
@@ -98,10 +93,13 @@ window.addEventListener("load", (function() {
             ].indexOf(keys_[i]) > -1) {
                 json_body.data[keys_[i]] = `${timeAgoConvert(json_body.data[keys_[i]])} тому`
             }
-            json_body.data = currency_calculate([
-                "annualized_rate", "profit", "current_price", "float_profit",
-                "total_price", "run-price"
-            ], json_body.data, json_body.currency)
+            if (!currency_update) {
+                json_body.data = currency_calculate([
+                    "annualized_rate", "profit", "current_price", "float_profit",
+                    "total_price", "run-price"
+                ], json_body.data, json_body.currency)
+                currency_update = true
+            }
             array_ = array_ + line_builder([
             json_body.hint[keys_[i]], json_body.data[keys_[i]]
             ], !i)
