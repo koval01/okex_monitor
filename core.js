@@ -144,6 +144,11 @@ window.addEventListener("load", function () {
         json_body["data"][keys_[i]] = get_time(
           new Date(json_body["data"][keys_[i]]))
       }
+      if ([
+        "was_launched"
+      ].indexOf(keys_[i]) > -1) {
+        json_body["data"][keys_[i]] = `${timeAgoConvert(json_body["data"][keys_[i]])} тому`
+      }
       array_ = array_+line_builder([
         json_body["hint"][keys_[i]], json_body["data"][keys_[i]]
       ], !i)
