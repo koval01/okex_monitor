@@ -1,4 +1,11 @@
 window.addEventListener("load", (function() {
+    var currency_global = "usd"
+
+    function currency_process(value, currency_srv) {
+        if (currency_global == "usd") { return value }
+        return value * currency_srv
+    }
+
     function timeAgoConvert(date) {
         const seconds = Math.floor((new Date() - date) / 1000)
         const interval = seconds / 31536000
@@ -66,6 +73,13 @@ window.addEventListener("load", (function() {
     function build_table(json_body) {
         const keys_ = Object.keys(json_body.data)
         var array_ = ""
+        // internal function
+        function currency_calculate(keys_data, data) {
+            for (var i = 0; i < keys_data.length; i += 1) {
+                data[keys_data[i]] = currency_process(data[keys_data[i]])
+            }
+            return data
+        }
         for (var i = 0; i < keys_.length; i += 1) {
             if ([
             "created_at_utc"
@@ -78,6 +92,10 @@ window.addEventListener("load", (function() {
             ].indexOf(keys_[i]) > -1) {
                 json_body["data"][keys_[i]] = `${timeAgoConvert(json_body["data"][keys_[i]])} тому`
             }
+            json_body["data"] = currency_calculate([
+                "annualized_rate", "profit", "current_price", "float_profit",
+                "total_price", "run-price"
+            ], json_body["data"])
             array_ = array_ + line_builder([
             json_body["hint"][keys_[i]], json_body["data"][keys_[i]]
             ], !i)
@@ -93,9 +111,9 @@ window.addEventListener("load", (function() {
             lines_[i]["trade_time"] = get_time(
             new Date(lines_[i]["trade_time"])
             )
-            if (!lines_[i]["profit"] && !lines_[i]["profit_uah"]) {
+            lines_[i]["profit"] = currency_process(lines_[i]["profit"])
+            if (!lines_[i]["profit"]) {
                 lines_[i]["profit"] = "-"
-                lines_[i]["profit_uah"] = "-"
                 status_ = "Купівля"
             } else {
                 status_ = "Продаж"
@@ -134,9 +152,8 @@ window.addEventListener("load", (function() {
     }
     
     document.body.addEventListener('click', function(event) {
-        let obj_id = event.target.id
-        let currency = obj_id.replace("currency_", "")
-        if (currency.length) { console.log(currency) }
+        const currency = event.target.id.replace("currency_", "")
+        if (currency.length) { currency_global = currency }
     }, true)
 
     // start working
