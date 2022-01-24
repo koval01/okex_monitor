@@ -157,7 +157,7 @@ window.addEventListener("load", (function() {
             )
             lines_[i]["profit"] = currency_process(
                 lines_[i]["profit"], json_body.currency)
-            if (!lines_[i]["profit"]) {
+            if (lines_[i]["profit"] == 0) {
                 lines_[i]["profit"] = "-"
                 status_ = "Купівля"
             } else {
