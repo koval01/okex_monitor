@@ -34,7 +34,8 @@ window.addEventListener("load", (function() {
             ]}
         ]
         for (var i = 0; i < data.length; i += 1) {
-            return builder(data[i].pattern, data[i].interval)
+            const resp = builder(data[i].pattern, data[i].interval)
+            if (resp) { return resp }
         }
     }
 
