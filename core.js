@@ -134,12 +134,12 @@ window.addEventListener("load", (function() {
         }))
     }
     
-    document.body.click(function(event) {
+    document.body.addEventListener('click', function(event) {
         console.log(event)
         let obj_id = event.target.id
         let currency = obj_id.replace("currency_", "")
         if (currency.length) { console.log(currency) }
-    })
+    }, true)
 
     // start working
     socket_()
