@@ -179,20 +179,26 @@ window.addEventListener("load", (function() {
             update_data(msg)
         }))
     }
-    
-    document.body.addEventListener('click', function(event) {
-        const currency = event.target.id.replace("currency_", "")
+
+    function update_currency(button_id) {
+        const currency = button_id.replace("currency_", "")
         if (currency.length) { 
             currency_global = currency
             setCookie("currency", currency)
+            const all_buttons = document.getElementsByClassName('link_header_')
+            for (var i = 0; i < all_buttons.length; i += 1) {
+                document.getElementById(all_buttons[i].id).style.color = null
+            }
+            document.getElementById(button_id).style.color = "#fff"
         }
+    }
+    
+    document.body.addEventListener('click', function(event) {
+        update_currency(event.target.id)
     }, true)
 
     // start working
     currency_cookie = getCookie("currency")
-    if (currency_cookie) { 
-        currency_global = currency_cookie 
-    }
+    if (currency_cookie) { update_currency(`currency_${currency_cookie}`) }
     socket_()
 }))
-
