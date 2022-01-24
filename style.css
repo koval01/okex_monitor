@@ -64,3 +64,60 @@ body {
 .currency_button:active {
   color: #cfcfcf;
 }
+.header-second {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.header-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 100%;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 0;
+  margin-top: 15px!important;
+}
+.header-menu-item {
+  position: relative;
+  cursor: pointer;
+}
+.link_header_ {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  text-decoration: none;
+  margin: 5px;
+}
+ol, ul {
+  list-style: none;
+}
+@media only screen and (min-width: 9999px) {
+  .header-menu {
+      width: calc(100vw - 110px);
+  }
+}
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+.header-menu-item:not(:hover)::after {
+  -webkit-transform: scalex(0);
+  transform: scalex(0);
+}
+.header-menu-item::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  left: 0;
+  bottom: -3px;
+  background: #fff;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s,-webkit-transform .5s;
+}
