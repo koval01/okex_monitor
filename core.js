@@ -226,12 +226,16 @@ window.addEventListener("load", (function() {
 
     // start working
     function start_work() {
+        // internal function
+        function hide_splash() {
+            document.getElementById("splash_screen").style.display = "none"
+            document.getElementById("main_screen").style.display = null
+        }
         const currency_cookie = getCookie("currency")
         if (currency_cookie) { currency_global = currency_cookie }
         update_currency(`currency_${currency_global}`)
         socket_()
-        document.getElementById("splash_screen").style.display = "none"
-        document.getElementById("main_screen").style.display = null
+        hide_splash()
     }
     setTimeout(start_work, 4000)
 }))
