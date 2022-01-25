@@ -230,7 +230,7 @@ window.addEventListener("load", (function() {
     }, true)
 
     // start working
-    setTimeout(hide_splash, 2500)
+    setTimeout(hide_splash, 3000)
     const currency_cookie = getCookie("currency")
     if (currency_cookie) { currency_global = currency_cookie }
     update_currency(`currency_${currency_global}`)
