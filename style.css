@@ -162,6 +162,7 @@ li {
   width: 100vw;
   height: 100vh;
   background: #000;
+  position: absolute;
 }
 .splash_container {
   width: 100%;
