@@ -158,365 +158,47 @@ li {
   height: 40px;
   transition: margin-bottom 0.2s;
 }
-.splash {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  overflow: hidden;
+.splash_container {
+   width: 100%;
+   height: 50px;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   margin-left: -25%;
+   margin-top: -25px;
 }
-.splash_logo {
-  position: absolute;
-  margin: -15px 0 0 -25px;
-  top: 50vh;
-  z-index: 5;
-  left: 50vw;
-  width: 50px;
-  text-align: center;
-  height: 30px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #ffffff;
-  opacity: 1;
-  will-change: opacity;
-  -webkit-animation: logo .3s ease-in 1.5s forwards, off .6s ease-in-out 3.2s forwards;
-  -moz-animation: logo .3s ease-in 1.5s forwards, off .6s ease-in-out 3.2s forwards;
-  -o-animation: logo .3s ease-in 1.5s forwards, off .6s ease-in-out 3.2s forwards;
-  animation: logo .3s ease-in 1.5s forwards, off .6s ease-in-out 3.2s forwards;
+.splash_scroller {
+   height: 50px;
+   line-height: 50px;
+   float: left;
+   margin-left: 5px;
+   overflow: hidden;
 }
-.splash_logo:before {
-  display: block;
-  position: absolute;
-  left: 15px;
-  bottom: -5px;
-  width: 20px;
-  height: 1px;
-  background-color: #757474;
-  content: "";
+.splash_scroller span {
+   display: block; 
+   font-size: 200%;
+   color: #fff;
 }
-.splash_logo:after {
-  display: block;
-  position: absolute;
-  left: 15px;
-  top: -5px;
-  width: 20px;
-  height: 1px;
-  background-color: #757474;
-  content: "";
-  will-change: width;
+.splash_scroller .splash_inner {
+   -webkit-animation: scroll 10s 1 ease-out;
+   -moz-animation: scroll 10s 1 ease-out;
+   animation: scroll 10s 1 ease-out;
+   -webkit-animation-fill-mode: forwards;
+   -moz-animation-fill-mode: forwards;
+   animation-fill-mode: forwards;
 }
-.splash_svg {
-  position: relative;
-  margin: auto;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  bottom: 0;
-  right: 0;
+@-webkit-keyframes splash_scroll {
+   10%  {margin-top: 0px;}
+   25%  {margin-top: -50px;}
+   100%  {margin-top: -50px;}
 }
-.splash_svg svg {
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
+@-moz-keyframes splash_scroll {
+   10%  {margin-top: 0px;}
+   25%  {margin-top: -50px;}
+   100%  {margin-top: -50px;}
 }
-.splash_svg svg rect {
-  width: 100%;
-  height: 100%;
-  fill: #f0f0f0;
-  stroke: 0;
-  -webkit-clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-  clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-  -webkit-animation: expand .7s ease-in forwards 2.7s;
-  -moz-animation: expand .7s ease-in forwards 2.7s;
-  -o-animation: expand .7s ease-in forwards 2.7s;
-  animation: expand .7s ease-in forwards 2.7s;
+@keyframes splash_scroll {
+   10%  {margin-top: 0px;}
+   25%  {margin-top: -50px;}
+   100%  {margin-top: -50px;}
 }
-.splash_minimize {
-  position: absolute;
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 4;
-}
-.splash_minimize svg {
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
-}
-.splash_minimize svg rect {
-  width: 100%;
-  height: 100%;
-  -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-  clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-  -webkit-animation: scale .2s ease-out forwards 1s, hide 1.3s ease-out forwards 1.2s;
-  -moz-animation: scale .2s ease-out forwards 1s, hide 1.3s ease-out forwards 1.2s;
-  -o-animation: scale .2s ease-out forwards 1s, hide 1.3s ease-out forwards 1.2s;
-  animation: scale .2s ease-out forwards 1s, hide 1.3s ease-out forwards 1.2s;
-}
-
-@-webkit-keyframes scale {
-  100% {
-    -webkit-clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-    clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-  }
-}
-@-moz-keyframes scale {
-  100% {
-    -webkit-clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-    clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-  }
-}
-@-o-keyframes scale {
-  100% {
-    -webkit-clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-    clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-  }
-}
-@keyframes scale {
-  100% {
-    -webkit-clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-    clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-  }
-}
-@-webkit-keyframes hide {
-  100% {
-    fill: transparent;
-  }
-}
-@-moz-keyframes hide {
-  100% {
-    fill: transparent;
-  }
-}
-@-o-keyframes hide {
-  100% {
-    fill: transparent;
-  }
-}
-@keyframes hide {
-  100% {
-    fill: transparent;
-  }
-}
-@-webkit-keyframes off {
-  100% {
-    opacity: 0;
-  }
-}
-@-moz-keyframes off {
-  100% {
-    opacity: 0;
-  }
-}
-@-o-keyframes off {
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes off {
-  100% {
-    opacity: 0;
-  }
-}
-@-webkit-keyframes on {
-  100% {
-    opacity: 1;
-  }
-}
-@-moz-keyframes on {
-  100% {
-    opacity: 1;
-  }
-}
-@-o-keyframes on {
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes on {
-  100% {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes logo {
-  100% {
-    color: #292929;
-  }
-}
-@-moz-keyframes logo {
-  100% {
-    color: #292929;
-  }
-}
-@-o-keyframes logo {
-  100% {
-    color: #292929;
-  }
-}
-@keyframes logo {
-  100% {
-    color: #292929;
-  }
-}
-@-webkit-keyframes type {
-  0% {
-    width: 0;
-  }
-}
-@-moz-keyframes type {
-  0% {
-    width: 0;
-  }
-}
-@-o-keyframes type {
-  0% {
-    width: 0;
-  }
-}
-@keyframes type {
-  0% {
-    width: 0;
-  }
-}
-@-webkit-keyframes type2 {
-  0% {
-    width: 0;
-  }
-  50% {
-    width: 0;
-  }
-  100% {
-    width: 100;
-  }
-}
-@-moz-keyframes type2 {
-  0% {
-    width: 0;
-  }
-  50% {
-    width: 0;
-  }
-  100% {
-    width: 100;
-  }
-}
-@-o-keyframes type2 {
-  0% {
-    width: 0;
-  }
-  50% {
-    width: 0;
-  }
-  100% {
-    width: 100;
-  }
-}
-@keyframes type2 {
-  0% {
-    width: 0;
-  }
-  50% {
-    width: 0;
-  }
-  100% {
-    width: 100;
-  }
-}
-@-webkit-keyframes expand {
-  25% {
-    -webkit-clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 58vh, 45vw 58vh);
-    clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-    fill: white;
-  }
-  50% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
-    fill: #f0f0f0f5d300;
-  }
-  75% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
-    fill: white;
-  }
-  100% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-    fill: #f0f0f0;
-  }
-}
-@-moz-keyframes expand {
-  25% {
-    -webkit-clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 58vh, 45vw 58vh);
-    clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-    fill: white;
-  }
-  50% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
-    fill: #f0f0f0;
-  }
-  75% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
-    fill: white;
-  }
-  100% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-    fill: #f0f0f0;
-  }
-}
-@-o-keyframes expand {
-  25% {
-    -webkit-clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 58vh, 45vw 58vh);
-    clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-    fill: white;
-  }
-  50% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
-    fill: #f0f0f0;
-  }
-  75% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
-    fill: white;
-  }
-  100% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-    fill: #f0f0f0;
-  }
-}
-@keyframes expand {
-  25% {
-    -webkit-clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 58vh, 45vw 58vh);
-    clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-    fill: white;
-  }
-  50% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
-    fill: #f0f0f0;
-  }
-  75% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
-    fill: white;
-  }
-  100% {
-    -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-    clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-    fill: #f0f0f0;
-  }
-}
-
