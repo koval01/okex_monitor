@@ -225,8 +225,11 @@ window.addEventListener("load", (function() {
     }, true)
 
     // start working
-    const currency_cookie = getCookie("currency")
-    if (currency_cookie) { currency_global = currency_cookie }
-    update_currency(`currency_${currency_global}`)
-    socket_()
+    function start_work() {
+        const currency_cookie = getCookie("currency")
+        if (currency_cookie) { currency_global = currency_cookie }
+        update_currency(`currency_${currency_global}`)
+        socket_()
+    }
+    setTimeout(start_work, 4000)
 }))
