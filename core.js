@@ -1,5 +1,76 @@
+lang_patterns = {
+    "uk": {
+        "algo_id": "Ідентифікатор",
+        "annualized_rate": "Розрахунковий річний дохід",
+        "investment": "Сума депозиту",
+        "current_price": "Поточна ціна",
+        "profit": "Отриманий дохід",
+        "float_profit": "Поточний стан",
+        "total_price": "Ціна сітки",
+        "run-price": "Ціна на запуску",
+        "trades_num": "Кількість торгів",
+        "arbitrages_num": "Кількість арбітражів",
+        "created_at_utc": "Дата створення",
+        "was_launched": "Було запущено",
+        "instance_id": "Біржа",
+        "instance_type": "Екземпляр",
+        "order_type": "Вид доходу"
+    },
+    "ru": {
+        "algo_id": "Идентификатор",
+        "annualized_rate": "Расчетный годовой доход",
+        "investment": "Сумма депозита",
+        "current_price": "Текущая цена",
+        "profit": "Полученный доход",
+        "float_profit": "Текущее состояние",
+        "total_price": "Цена сетки",
+        "run-price": "Цена на запуске",
+        "trades_num": "Количество торгов",
+        "arbitrages_num": "Количество арбитражей",
+        "created_at_utc": "Дата создания",
+        "was_launched": "Было запущено",
+        "instance_id": "Биржа",
+        "instance_type": "Экземпляр",
+        "order_type": "Вид дохода"
+    },
+    "en": {
+        "algo_id": "ID",
+        "annualized_rate": "Estimated annual income",
+        "investment": "Deposit amount",
+        "current_price": "Current price",
+        "profit": "Income received",
+        "float_profit": "Current state",
+        "total_price": "Grid price",
+        "run-price": "Launch price",
+        "trades_num": "Number of trades",
+        "arbitrages_num": "Number of arbitrations",
+        "created_at_utc": "Date of creation",
+        "was_launched": "Was launched",
+        "instance_id": "Exchange",
+        "instance_type": "Instance",
+        "order_type": "Type of income"
+    },
+    "pl": {
+        "algo_id": "Identyfikator",
+        "annualized_rate": "Szacowany roczny dochód",
+        "investment": "Kwota depozytu",
+        "current_price": "Aktualna cena",
+        "profit": "Otrzymany dochód",
+        "float_profit": "Stan aktulany",
+        "total_price": "Cena siatki",
+        "run-price": "Cena uruchomienia",
+        "trades_num": "Liczba transakcji",
+        "arbitrages_num": "Liczba arbitraży",
+        "created_at_utc": "Data utworzenia",
+        "was_launched": "Została uruchomiona",
+        "instance_id": "Giełda",
+        "instance_type": "Instancja",
+        "order_type": "Rodzaj dochodu"
+    },
+}
+
 window.addEventListener("load", (function() {
-    var currency_global = "uah", notify_hidden = true
+    var currency_global = "uah", notify_hidden = true, lang_loc = "uk"
     
     function price_dif(actual_price, buy_price) {
         return (((actual_price - buy_price) / buy_price) * 100).toFixed(3)
@@ -145,7 +216,7 @@ window.addEventListener("load", (function() {
                 currency_update = true
             }
             array_ = array_ + line_builder([
-            json_body.hint[keys_[i]], json_body.data[keys_[i]]
+            lang_patterns[lang_loc][keys_[i]], json_body.data[keys_[i]]
             ], !i)
         }
         return array_
