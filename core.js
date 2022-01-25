@@ -1,4 +1,5 @@
-lang_patterns = {
+// localization dictionary
+const lang_patterns = {
     "uk": {
         "algo_id": "Ідентифікатор",
         "annualized_rate": "Розрахунковий річний дохід",
@@ -116,10 +117,10 @@ lang_patterns = {
         "selected_currency": "Wybrana waluta"
     }
 }
+// global variables
+var currency_global = "uah", notify_hidden = true, lang_loc = "uk"
 
 window.addEventListener("load", (function() {
-    var currency_global = "uah", notify_hidden = true, lang_loc = "uk"
-    
     function price_dif(actual_price, buy_price) {
         return (((actual_price - buy_price) / buy_price) * 100).toFixed(3)
     }
