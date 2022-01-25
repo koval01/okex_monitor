@@ -1,6 +1,10 @@
 window.addEventListener("load", (function() {
     var currency_global = "uah", notify_hidden = true
     
+    function price_dif(actual_price, buy_price) {
+        return (((actual_price - buy_price) / buy_price) * 100).toFixed(3)
+    }
+    
     function notify(text) {
         const error_box = document.getElementById("error_box")
         const error_text = document.getElementById("error_text")
