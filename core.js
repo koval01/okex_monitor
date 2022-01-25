@@ -1,5 +1,5 @@
 window.addEventListener("load", (function() {
-    var currency_global = "usd", notify_hidden = true
+    var currency_global = "uah", notify_hidden = true
     
     function notify(text) {
         const error_box = document.getElementById("error_box")
