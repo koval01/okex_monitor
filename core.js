@@ -5,15 +5,14 @@ window.addEventListener("load", (function() {
         const error_box = document.getElementById("error_box")
         const error_text = document.getElementById("error_text")
 
-        if (!notify_hidden) {
+        if (notify_hidden) {
+            notify_hidden = false
             error_text.innerText = text
             error_box.style["margin-bottom"] = "0"
             setTimeout(function() {
                 error_box.style["margin-bottom"] = "-50px"
                 notify_hidden = true
             }, 2500)
-        } else {
-            notify_hidden = false 
         }
     }
 
