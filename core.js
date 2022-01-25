@@ -201,7 +201,7 @@ window.addEventListener("load", (function() {
     }
 
     function get_time(time) {
-        return time.toLocaleDateString("en", {
+        return time.toLocaleDateString(lang_loc, {
             year: "numeric",
             month: "numeric",
             day: "numeric",
@@ -246,7 +246,7 @@ window.addEventListener("load", (function() {
             if ([
             "was_launched"
             ].indexOf(keys_[i]) > -1) {
-                json_body.data[keys_[i]] = `${localization_["last_update"]}: ${
+                json_body.data[keys_[i]] = `${
                     timeAgoConvert(json_body.data[keys_[i]])} ${
                         localization_["later"]}`
             }
@@ -289,6 +289,7 @@ window.addEventListener("load", (function() {
     }
 
     function update_data(data) {
+        const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
         data = data.data
         document.title = `OkxGrid | ${currency_process(
             data.data.float_profit, data.currency
@@ -298,7 +299,7 @@ window.addEventListener("load", (function() {
         document.getElementById(
         "trade_body").innerHTML = build_trades_table(data)
         document.getElementById(
-        "last_update_stamp").innerHTML = get_time(new Date())
+        "last_update_stamp").innerHTML = `${localization_["last_update"]}: ${get_time(new Date())}`
     }
 
     function socket_() {
