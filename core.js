@@ -374,7 +374,7 @@ window.addEventListener("load", (function() {
         const wait_ = ["grid", "trades"]
         const trades_ = ["time", "profit", "action"]
         const trades_name = "trade_table_title"
-        for (const i = 0; i < all_buttons.length; i += 1) {
+        for (const i in wait_) {
             let pattern_ = `localization_waiting_data_${wait_[i]}`
             try {
                 document.getElementById(pattern_
