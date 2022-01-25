@@ -14,7 +14,19 @@ lang_patterns = {
         "was_launched": "Було запущено",
         "instance_id": "Біржа",
         "instance_type": "Екземпляр",
-        "order_type": "Вид доходу"
+        "order_type": "Вид доходу",
+        "time_converter_patterns": {
+            "year": ["рік", "роки", "років"],
+            "month": ["місяць", "місяці", "місяців"],
+            "day": ["день", "дні", "днів"],
+            "hour": ["годину", "години", "годин"],
+            "minute": ["хвилину", "хвилини", "хвилин"],
+            "later": "тому",
+            "last_update": "Оновлено"
+        },
+        "buy_title": "Купівля",
+        "sell_title": "Продаж",
+        "selected_currency": "Обрано валюту"
     },
     "ru": {
         "algo_id": "Идентификатор",
@@ -31,7 +43,19 @@ lang_patterns = {
         "was_launched": "Было запущено",
         "instance_id": "Биржа",
         "instance_type": "Экземпляр",
-        "order_type": "Вид дохода"
+        "order_type": "Вид дохода",
+        "time_converter_patterns": {
+            "year": ["год", "года", "лет"],
+            "month": ["месяц", "месяца", "месяцев"],
+            "day": ["день", "дня", "дней"],
+            "hour": ["час", "часа", "часов"],
+            "minute": ["минуту", "минуты", "минут"],
+            "later": "назад",
+            "last_update": "Обновлено"
+        },
+        "buy_title": "Покупка",
+        "sell_title": "Продажа",
+        "selected_currency": "Выбрана валюта"
     },
     "en": {
         "algo_id": "ID",
@@ -48,7 +72,19 @@ lang_patterns = {
         "was_launched": "Was launched",
         "instance_id": "Exchange",
         "instance_type": "Instance",
-        "order_type": "Type of income"
+        "order_type": "Type of income",
+        "time_converter_patterns": {
+            "year": ["year", "years", "years"],
+            "month": ["month", "months", "months"],
+            "day": ["day", "days", "days"],
+            "hour": ["hour", "hours", "hours"],
+            "minute": ["minute", "minutes", "minutes"],
+            "later": "later",
+            "last_update": "Updated"
+        },
+        "buy_title": "Buy",
+        "sell_title": "Sell",
+        "selected_currency": "Selected currency"
     },
     "pl": {
         "algo_id": "Identyfikator",
@@ -65,8 +101,20 @@ lang_patterns = {
         "was_launched": "Została uruchomiona",
         "instance_id": "Giełda",
         "instance_type": "Instancja",
-        "order_type": "Rodzaj dochodu"
-    },
+        "order_type": "Rodzaj dochodu",
+        "time_converter_patterns": {
+            "year": ["rok", "lata", "lat"],
+            "month": ["miesiąc", "miesiące", "miesięcy"],
+            "day": ["dzień", "dni", "dni"],
+            "hour": ["godzina", "godziny", "godzina"],
+            "minute": ["minuta", "minuty", "minut"],
+            "later": "temu",
+            "last_update": "Zaktualizowano"
+        },
+        "buy_title": "Zakup",
+        "sell_title": "Sprzedaż",
+        "selected_currency": "Wybrana waluta"
+    }
 }
 
 window.addEventListener("load", (function() {
@@ -138,22 +186,13 @@ window.addEventListener("load", (function() {
                 } else { return time_ + ` ${data[2]}` }
             }
         }
+        const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
         const data = [
-            {interval: interval, pattern: [
-                "рік", "роки", "років"
-            ]},
-            {interval: seconds / 2592000, pattern: [
-                "місяць", "місяці", "місяців"
-            ]},
-            {interval: seconds / 86400, pattern: [
-                "день", "дні", "днів"
-            ]},
-            {interval: seconds / 3600, pattern: [
-                "годину", "години", "годин"
-            ]},
-            {interval: seconds / 60, pattern: [
-                "хвилину", "хвилини", "хвилин"
-            ]}
+            {interval: interval, pattern: localization_["year"]},
+            {interval: seconds / 2592000, pattern: localization_["month"]},
+            {interval: seconds / 86400, pattern: localization_["day"]},
+            {interval: seconds / 3600, pattern: localization_["hour"]},
+            {interval: seconds / 60, pattern: localization_["minute"]}
         ]
         for (var i = 0; i < data.length; i += 1) {
             const resp = builder(data[i].pattern, data[i].interval)
@@ -162,7 +201,7 @@ window.addEventListener("load", (function() {
     }
 
     function get_time(time) {
-        return time.toLocaleDateString("ua", {
+        return time.toLocaleDateString("en", {
             year: "numeric",
             month: "numeric",
             day: "numeric",
@@ -187,6 +226,7 @@ window.addEventListener("load", (function() {
 
     function build_table(json_body) {
         const keys_ = Object.keys(json_body.data)
+        const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
         var array_ = "", currency_update = false
         // internal function
         function currency_calculate(keys_data, data, currency_srv) {
@@ -206,7 +246,9 @@ window.addEventListener("load", (function() {
             if ([
             "was_launched"
             ].indexOf(keys_[i]) > -1) {
-                json_body.data[keys_[i]] = `${timeAgoConvert(json_body.data[keys_[i]])} тому`
+                json_body.data[keys_[i]] = `${localization_["last_update"]}: ${
+                    timeAgoConvert(json_body.data[keys_[i]])} ${
+                        localization_["later"]}`
             }
             if (!currency_update) {
                 json_body.data = currency_calculate([
@@ -224,6 +266,7 @@ window.addEventListener("load", (function() {
 
     function build_trades_table(json_body) {
         const lines_ = json_body.trades
+        const localization_ = lang_patterns[lang_loc]
         let array_ = "",
             status_ = ""
         for (var i = 0; i < lines_.length; i += 1) {
@@ -234,9 +277,9 @@ window.addEventListener("load", (function() {
                 lines_[i]["profit"], json_body.currency)
             if (lines_[i]["profit"] == 0) {
                 lines_[i]["profit"] = "-"
-                status_ = "Купівля"
+                status_ = localization_["buy_title"]
             } else {
-                status_ = "Продаж"
+                status_ = localization_["sell_title"]
             }
             array_ = array_ + line_builder([
             lines_[i]["trade_time"], lines_[i]["profit"], status_
@@ -249,7 +292,7 @@ window.addEventListener("load", (function() {
         data = data.data
         document.title = `OkxGrid | ${currency_process(
             data.data.float_profit, data.currency
-        )} ${currency_global.toUpperCase()}`
+        )} ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
         document.getElementById(
         "data_body").innerHTML = build_table(data)
         document.getElementById(
@@ -274,7 +317,7 @@ window.addEventListener("load", (function() {
     }
     
     function currency_change_notify() {
-        notify(`Обрано валюту - ${currency_global.toUpperCase()}`)
+        notify(`${lang_patterns[lang_loc]["selected_currency"]} - ${currency_global.toUpperCase()}`)
     }
 
     function update_currency(button_id) {
