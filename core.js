@@ -220,22 +220,19 @@ window.addEventListener("load", (function() {
         }
     }
     
+    function hide_splash() {
+        document.getElementById("splash_screen").style.display = "none"
+        document.getElementById("main_screen").style.display = null
+    }
+    
     document.body.addEventListener('click', function(event) {
         update_currency(event.target.id)
     }, true)
 
     // start working
-    function start_work() {
-        // internal function
-        function hide_splash() {
-            document.getElementById("splash_screen").style.display = "none"
-            document.getElementById("main_screen").style.display = null
-        }
-        const currency_cookie = getCookie("currency")
-        if (currency_cookie) { currency_global = currency_cookie }
-        update_currency(`currency_${currency_global}`)
-        socket_()
-        hide_splash()
-    }
-    setTimeout(start_work, 4000)
+    setTimeout(hide_splash, 4000)
+    const currency_cookie = getCookie("currency")
+    if (currency_cookie) { currency_global = currency_cookie }
+    update_currency(`currency_${currency_global}`)
+    socket_()
 }))
