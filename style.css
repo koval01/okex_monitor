@@ -26,6 +26,7 @@ hr {
 body {
   background:#2c2c2e;
   color:#e5e5ea;
+  font-family: "Open Sans", sans-serif;
 }
 .oneline_text {
   white-space: nowrap; 
@@ -157,71 +158,6 @@ li {
   height: 40px;
   transition: margin-bottom 0.2s;
 }
-body {
-  background-color: #191919;
-  font-family: "Open Sans", sans-serif;
-}
-
-.text {
-  opacity: 0;
-  position: absolute;
-  z-index: 7;
-  text-align: left;
-  margin: -50px 0 0 -150px;
-  width: 300px;
-  height: 100px;
-  top: 50%;
-  left: 50%;
-  font-size: 48px;
-  font-weight: 700;
-  -webkit-animation: on .6s ease-in-out 3.7s forwards;
-  -moz-animation: on .6s ease-in-out 3.7s forwards;
-  -o-animation: on .6s ease-in-out 3.7s forwards;
-  animation: on .6s ease-in-out 3.7s forwards;
-}
-.text p {
-  white-space: nowrap;
-  overflow: hidden;
-  width: 100%;
-  -webkit-animation: type .3s steps(60, end) 3.7s;
-  -moz-animation: type .3s steps(60, end) 3.7s;
-  -o-animation: type .3s steps(60, end) 3.7s;
-  animation: type .3s steps(60, end) 3.7s;
-}
-.text p:nth-child(2) {
-  -webkit-animation: type2 .5s steps(60, end) 3.7s;
-  -moz-animation: type2 .5s steps(60, end) 3.7s;
-  -o-animation: type2 .5s steps(60, end) 3.7s;
-  animation: type2 .5s steps(60, end) 3.7s;
-}
-.text button {
-  border: 0;
-  opacity: 0;
-  background: #191919;
-  color: #f5d300;
-  border: 1px solid #191919;
-  letter-spacing: 2px;
-  padding: 0.5rem 2.5rem;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  -webkit-transition: color 0.5s, background-color 0.5s;
-  -moz-transition: color 0.5s, background-color 0.5s;
-  -ms-transition: color 0.5s, background-color 0.5s;
-  -o-transition: color 0.5s, background-color 0.5s;
-  transition: color 0.5s, background-color 0.5s;
-  -webkit-animation: on .6s ease-in-out 4s forwards;
-  -moz-animation: on .6s ease-in-out 4s forwards;
-  -o-animation: on .6s ease-in-out 4s forwards;
-  animation: on .6s ease-in-out 4s forwards;
-}
-.text button:hover {
-  background: #f5d300;
-  color: #191919;
-  border: 1px solid #191919;
-}
-
 .splash {
   width: 100vw;
   height: 100vh;
