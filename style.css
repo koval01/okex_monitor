@@ -186,25 +186,25 @@ li {
   color: #fff;
   }
 .splash_scroller .splash_inner {
-  -webkit-animation: scroll 10s 1 ease-out;
-  -moz-animation: scroll 10s 1 ease-out;
-  animation: scroll 10s 1 ease-out;
+  -webkit-animation: splash_scroll 10s 1 ease-out;
+  -moz-animation: splash_scroll 10s 1 ease-out;
+  animation: splash_scroll 10s 1 ease-out;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 @-webkit-keyframes splash_scroll {
   10%  {margin-top: 0px}
-  25%  {margin-top: -50px}
+  20%  {margin-top: -50px}
   100%  {margin-top: -50px}
 }
 @-moz-keyframes splash_scroll {
   10%  {margin-top: 0px}
-  25%  {margin-top: -50px}
+  20%  {margin-top: -50px}
   100%  {margin-top: -50px}
 }
 @keyframes splash_scroll {
   10%  {margin-top: 0px}
-  25%  {margin-top: -50px}
+  20%  {margin-top: -50px}
   100%  {margin-top: -50px}
 }
