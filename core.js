@@ -371,8 +371,11 @@ window.addEventListener("load", (function() {
         const trades_ = ["time", "profit", "action"]
         const trades_name = "trade_table_title"
         for (const i = 0; i < all_buttons.length; i += 1) {
-            document.getElementById(`localization_waiting_data_${wait_[i]}`
-            ).innerHTML = localization_["localization_waiting_data"]
+            let pattern_ = `localization_waiting_data_${wait_[i]}`
+            try {
+                document.getElementById(pattern_
+                ).innerHTML = localization_["localization_waiting_data"]
+            } catch {}
         }
         for (const i in trades_) {
             document.getElementById(`${trades_name}_${trades_[i]}`
