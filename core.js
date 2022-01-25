@@ -9,7 +9,7 @@ window.addEventListener("load", (function() {
             error_text.innerText = text
             error_box.style["margin-bottom"] = "0"
             setTimeout(function() {
-                error_box.css.style["margin-bottom"] = "-50px"
+                error_box.style["margin-bottom"] = "-50px"
                 notify_hidden = true
             }, 2500)
         } else {
