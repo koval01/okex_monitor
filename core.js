@@ -28,6 +28,7 @@ const lang_patterns = {
         "buy_title": "Купівля",
         "sell_title": "Продаж",
         "selected_currency": "Обрано валюту",
+        "selected_lang": "Обрано мову",
         "trade_table_title": {
             "time": "Час",
             "profit": "Дохід",
@@ -63,6 +64,7 @@ const lang_patterns = {
         "buy_title": "Покупка",
         "sell_title": "Продажа",
         "selected_currency": "Выбрана валюта",
+        "selected_lang": "Выбран язык",
         "trade_table_title": {
             "time": "Время",
             "profit": "Доход",
@@ -98,6 +100,7 @@ const lang_patterns = {
         "buy_title": "Buy",
         "sell_title": "Sell",
         "selected_currency": "Selected currency",
+        "selected_lang": "Language selected",
         "trade_table_title": {
             "time": "Time",
             "profit": "Profit",
@@ -133,6 +136,7 @@ const lang_patterns = {
         "buy_title": "Zakup",
         "sell_title": "Sprzedaż",
         "selected_currency": "Wybrana waluta",
+        "selected_lang": "Wybrany język",
         "trade_table_title": {
             "time": "Czas",
             "profit": "Dochód",
