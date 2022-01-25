@@ -27,7 +27,13 @@ const lang_patterns = {
         },
         "buy_title": "Купівля",
         "sell_title": "Продаж",
-        "selected_currency": "Обрано валюту"
+        "selected_currency": "Обрано валюту",
+        "trade_table_title": {
+            "time": "Час",
+            "profit": "Дохід",
+            "action": "Операція"
+        },
+        "localization_waiting_data": "Очікування даних..."
     },
     "ru": {
         "algo_id": "Идентификатор",
@@ -56,7 +62,13 @@ const lang_patterns = {
         },
         "buy_title": "Покупка",
         "sell_title": "Продажа",
-        "selected_currency": "Выбрана валюта"
+        "selected_currency": "Выбрана валюта",
+        "trade_table_title": {
+            "time": "Время",
+            "profit": "Доход",
+            "action": "Операция"
+        },
+        "localization_waiting_data": "Ожидание данных..."
     },
     "en": {
         "algo_id": "ID",
@@ -85,7 +97,13 @@ const lang_patterns = {
         },
         "buy_title": "Buy",
         "sell_title": "Sell",
-        "selected_currency": "Selected currency"
+        "selected_currency": "Selected currency",
+        "trade_table_title": {
+            "time": "Time",
+            "profit": "Profit",
+            "action": "Operation"
+        },
+        "localization_waiting_data": "Waiting for data..."
     },
     "pl": {
         "algo_id": "Identyfikator",
@@ -114,7 +132,13 @@ const lang_patterns = {
         },
         "buy_title": "Zakup",
         "sell_title": "Sprzedaż",
-        "selected_currency": "Wybrana waluta"
+        "selected_currency": "Wybrana waluta",
+        "trade_table_title": {
+            "time": "Czas",
+            "profit": "Dochód",
+            "action": "Operacja"
+        },
+        "localization_waiting_data": "Czekam na dane..."
     }
 }
 // global variables
@@ -340,12 +364,28 @@ window.addEventListener("load", (function() {
         document.getElementById("splash_screen").style.display = "none"
         document.getElementById("main_screen").style.display = null
     }
+
+    function update_localization() {
+        const localization_ = lang_patterns[lang_loc]
+        const wait_ = ["grid", "trades"]
+        const trades_ = ["time", "profit", "action"]
+        const trades_name = "trade_table_title"
+        for (let i in wait_) {
+            document.getElementById(`localization_waiting_data_${wait_[i]}`
+            ).innerHTML = localization_["localization_waiting_data"]
+        }
+        for (let i in trades_) {
+            document.getElementById(`${trades_name}_${trades_[i]}`
+            ).innerHTML = localization_[trades_name][trades_[i]]
+        }
+    }
     
     document.body.addEventListener('click', function(event) {
         update_currency(event.target.id)
     }, true)
 
     // start working
+    setInterval(update_localization, 100)
     setTimeout(hide_splash, 3000)
     const currency_cookie = getCookie("currency")
     if (currency_cookie) { currency_global = currency_cookie }
