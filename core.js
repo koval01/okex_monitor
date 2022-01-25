@@ -230,6 +230,8 @@ window.addEventListener("load", (function() {
         if (currency_cookie) { currency_global = currency_cookie }
         update_currency(`currency_${currency_global}`)
         socket_()
+        document.getElementById("splash_screen").style.display = "none"
+        document.getElementById("main_screen").style.display = null
     }
     setTimeout(start_work, 4000)
 }))
