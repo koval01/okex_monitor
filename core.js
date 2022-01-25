@@ -2,19 +2,19 @@ window.addEventListener("load", (function() {
     var currency_global = "usd", notify_hidden = true
     
     function notify(text) {
-//         const error_box = $(".error_box")
-//         const error_text = $(".error_text")
+        const error_box = document.getElementById("error_box")
+        const error_text = document.getElementById("error_text")
 
-//         if (!notify_hidden) {
-//             error_text.text(text)
-//             error_box.css("margin-bottom", "0")
-//             setTimeout(function() {
-//                 error_box.css("margin-bottom", "-50px")
-//                 notify_hidden = true
-//             }, 2500)
-//         } else {
-//             notify_hidden = false 
-//         }
+        if (!notify_hidden) {
+            error_text.innerText = text
+            error_box.style["margin-bottom"] = "0"
+            setTimeout(function() {
+                error_box.css.style["margin-bottom"] = "-50px"
+                notify_hidden = true
+            }, 2500)
+        } else {
+            notify_hidden = false 
+        }
     }
 
     function getCookie(name) {
@@ -42,6 +42,7 @@ window.addEventListener("load", (function() {
     }
 
     function currency_process(value, currency_srv) {
+        if (value == 0) { value = value.toFixed(3) }
         if (currency_global == "usd") { return value }
         return (value * currency_srv[currency_global]).toFixed(3)
     }
@@ -173,7 +174,8 @@ window.addEventListener("load", (function() {
     function update_data(data) {
         data = data.data
         document.title = `OkxGrid | ${currency_process(
-            data.data.float_profit, data.currency)} ${currency_global.toUpperCase()}`
+            data.data.float_profit, data.currency
+        )} ${currency_global.toUpperCase()}`
         document.getElementById(
         "data_body").innerHTML = build_table(data)
         document.getElementById(
