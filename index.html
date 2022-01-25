@@ -13,56 +13,54 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js" integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv8JE9UgjcwfBFg/eHC/VMws+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
-    <body class="py-4 noselect">
-        <div class="splash_background" id="splash_screen">
-            <div class="splash_container">
-                <div class="splash_scroller">
-                    <div class="splash_inner">
-                        <span>Developed</span>
-                        <span>by Koval</span>
-                    </div>
+    <body style="background:#000" id="splash_screen">
+        <div class="splash_container">
+            <div class="splash_scroller">
+                <div class="splash_inner">
+                    <span>Developed</span>
+                    <span>by Koval</span>
                 </div>
             </div>
         </div>
-        <div id="main_screen" style="display:none">
-            <main>
-                <div class="header-second noselect">
-                    <ul class="header-menu">
-                        <li class="header-menu-item"><a class="link_header_" id="currency_usd">USD</a></li>
-                        <li class="header-menu-item"><a class="link_header_" id="currency_uah">UAH</a></li>
-                        <li class="header-menu-item"><a class="link_header_" id="currency_rub">RUB</a></li>
-                        <li class="header-menu-item"><a class="link_header_" id="currency_eur">EUR</a></li>
-                        <li class="header-menu-item"><a class="link_header_" id="currency_pln">PLN</a></li>
-                    </ul>
+    </body>
+    <body class="py-4 noselect" id="main_screen" style="display:none">
+        <main>
+            <div class="header-second noselect">
+                <ul class="header-menu">
+                    <li class="header-menu-item"><a class="link_header_" id="currency_usd">USD</a></li>
+                    <li class="header-menu-item"><a class="link_header_" id="currency_uah">UAH</a></li>
+                    <li class="header-menu-item"><a class="link_header_" id="currency_rub">RUB</a></li>
+                    <li class="header-menu-item"><a class="link_header_" id="currency_eur">EUR</a></li>
+                    <li class="header-menu-item"><a class="link_header_" id="currency_pln">PLN</a></li>
+                </ul>
+            </div>
+            <div class="container">
+                <p class="text_table_pos">
+                    Оновлено: <span id="last_update_stamp">...</span>
+                </p>
+                <div class="table_block row row-cols-2 gx-4" id="data_body">
+                    <div class="col themed-grid-col" style="border:0">
+                        <span class="oneline_text">Очікування даних...</span>
+                    </div>
+                    <div class="col themed-grid-col" style="border:0"></div>
                 </div>
-                <div class="container">
-                    <p class="text_table_pos">
-                        Оновлено: <span id="last_update_stamp">...</span>
-                    </p>
-                    <div class="table_block row row-cols-2 gx-4" id="data_body">
-                        <div class="col themed-grid-col" style="border:0">
-                            <span class="oneline_text">Очікування даних...</span>
-                        </div>
-                        <div class="col themed-grid-col" style="border:0"></div>
+                <br/>
+                <hr/>
+                <br/>
+                <div class="table_head row row-cols-3 gx-4" id="trade_header">
+                    <div class="col themed-grid-col" style="border:0">Час</div>
+                    <div class="col themed-grid-col" style="border:0">Дохід</div>
+                    <div class="col themed-grid-col" style="border:0">Операція</div>
+                </div>
+                <div class="table_block row row-cols-3 gx-4" id="trade_body">
+                    <div class="col themed-grid-col" style="border:0">
+                        <span class="oneline_text">Очікування даних...</span>
                     </div>
-                    <br/>
-                    <hr/>
-                    <br/>
-                    <div class="table_head row row-cols-3 gx-4" id="trade_header">
-                        <div class="col themed-grid-col" style="border:0">Час</div>
-                        <div class="col themed-grid-col" style="border:0">Дохід</div>
-                        <div class="col themed-grid-col" style="border:0">Операція</div>
-                    </div>
-                    <div class="table_block row row-cols-3 gx-4" id="trade_body">
-                        <div class="col themed-grid-col" style="border:0">
-                            <span class="oneline_text">Очікування даних...</span>
-                        </div>
-                        <div class="col themed-grid-col" style="border:0"></div>
-                        <div class="col themed-grid-col" style="border:0"></div>
-                    </div>
-            </main>
-            <div id="error_box" style="margin-bottom:-50px"><p id="error_text"></p></div>
-        </div>
+                    <div class="col themed-grid-col" style="border:0"></div>
+                    <div class="col themed-grid-col" style="border:0"></div>
+                </div>
+        </main>
+        <div id="error_box" style="margin-bottom:-50px"><p id="error_text"></p></div>
     </body>
     <script src="core.js"></script>
 </html>
