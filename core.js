@@ -370,11 +370,11 @@ window.addEventListener("load", (function() {
         const wait_ = ["grid", "trades"]
         const trades_ = ["time", "profit", "action"]
         const trades_name = "trade_table_title"
-        for (let i in wait_) {
+        for (const i = 0; i < all_buttons.length; i += 1) {
             document.getElementById(`localization_waiting_data_${wait_[i]}`
             ).innerHTML = localization_["localization_waiting_data"]
         }
-        for (let i in trades_) {
+        for (const i in trades_) {
             document.getElementById(`${trades_name}_${trades_[i]}`
             ).innerHTML = localization_[trades_name][trades_[i]]
         }
