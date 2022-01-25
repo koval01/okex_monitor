@@ -158,12 +158,6 @@ li {
   height: 40px;
   transition: margin-bottom 0.2s;
 }
-.splash_background {
-  width: 100%;
-  height: 100%;
-  background: #000;
-  position: absolute;
-}
 .splash_container {
   width: 100%;
   height: 50px;
