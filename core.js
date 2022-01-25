@@ -198,6 +198,10 @@ window.addEventListener("load", (function() {
             update_data(msg)
         }))
     }
+    
+    function currency_change_notify() {
+        notify(`Обрано валюту - ${currency_global.toUpperCase()}`)
+    }
 
     function update_currency(button_id) {
         const currency = button_id.replace("currency_", "")
@@ -209,7 +213,7 @@ window.addEventListener("load", (function() {
                 document.getElementById(all_buttons[i].id).style.color = null
             }
             document.getElementById(button_id).style.color = "#fff"
-            notify(`Обрано валюту - ${currency_global.toUpperCase()}`)
+            currency_change_notify()
         }
     }
     
@@ -218,7 +222,8 @@ window.addEventListener("load", (function() {
     }, true)
 
     // start working
-    currency_cookie = getCookie("currency")
-    if (currency_cookie) { update_currency(`currency_${currency_cookie}`) }
+    const currency_cookie = getCookie("currency")
+    if (currency_cookie) { currency_global = currency_cookie }
+    update_currency(`currency_${currency_global}`)
     socket_()
 }))
