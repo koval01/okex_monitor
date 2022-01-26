@@ -131,28 +131,31 @@ window.addEventListener("load", (function() {
             return data
         }
         for (var i = 0; i < keys_.length; i += 1) {
+            var data_ = json_body.data
             if ([
             "created_at_utc"
             ].indexOf(keys_[i]) > -1) {
-                json_body.data[keys_[i]] = get_time(
-                new Date(json_body.data[keys_[i]]))
+                data_[keys_[i]] = get_time(
+                new Date(data_[keys_[i]]))
             }
             if ([
             "was_launched"
             ].indexOf(keys_[i]) > -1) {
-                json_body.data[keys_[i]] = `${
-                    timeAgoConvert(json_body.data[keys_[i]])} ${
+                data_[keys_[i]] = `${
+                    timeAgoConvert(data_[keys_[i]])} ${
                         localization_["later"]}`
             }
             if (!currency_update) {
-                json_body.data = currency_calculate([
+                data_ = currency_calculate([
                     "annualized_rate", "profit", "current_price", "float_profit",
                     "total_price", "run-price"
-                ], json_body.data, json_body.currency)
+                ], data_, json_body.currency)
                 currency_update = true
             }
+            data_["current_price"] = `${data_["current_price"]} ${
+                price_dif(data_["current_price"], data_["run-price"])}`
             array_ = array_ + line_builder([
-            lang_patterns[lang_loc][keys_[i]], json_body.data[keys_[i]]
+            lang_patterns[lang_loc][keys_[i]], data_[keys_[i]]
             ], !i)
         }
         return array_
