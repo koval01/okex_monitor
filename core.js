@@ -150,10 +150,10 @@ window.addEventListener("load", (function() {
                     "annualized_rate", "profit", "current_price", "float_profit",
                     "total_price", "run-price"
                 ], data_, json_body.currency)
+                data_["current_price"] = `${data_["current_price"]} (${
+                    price_dif(data_["current_price"], data_["run-price"])})`
                 currency_update = true
             }
-            data_["current_price"] = `${data_["current_price"]} (${
-                price_dif(data_["current_price"], data_["run-price"])})`
             array_ = array_ + line_builder([
             lang_patterns[lang_loc][keys_[i]], data_[keys_[i]]
             ], !i)
