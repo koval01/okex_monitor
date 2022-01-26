@@ -1,154 +1,19 @@
-// localization dictionary
-const lang_patterns = {
-    "uk": {
-        "algo_id": "Ідентифікатор",
-        "annualized_rate": "Розрахунковий річний дохід",
-        "investment": "Сума депозиту",
-        "current_price": "Поточна ціна",
-        "profit": "Отриманий дохід",
-        "float_profit": "Поточний стан",
-        "total_price": "Ціна сітки",
-        "run-price": "Ціна на запуску",
-        "trades_num": "Кількість торгів",
-        "arbitrages_num": "Кількість арбітражів",
-        "created_at_utc": "Дата створення",
-        "was_launched": "Було запущено",
-        "instance_id": "Біржа",
-        "instance_type": "Екземпляр",
-        "order_type": "Вид доходу",
-        "time_converter_patterns": {
-            "year": ["рік", "роки", "років"],
-            "month": ["місяць", "місяці", "місяців"],
-            "day": ["день", "дні", "днів"],
-            "hour": ["годину", "години", "годин"],
-            "minute": ["хвилину", "хвилини", "хвилин"],
-            "later": "тому",
-            "last_update": "Оновлено"
-        },
-        "buy_title": "Купівля",
-        "sell_title": "Продаж",
-        "selected_currency": "Обрано валюту",
-        "selected_lang": "Обрано мову",
-        "trade_table_title": {
-            "time": "Час",
-            "profit": "Дохід",
-            "action": "Операція"
-        },
-        "localization_waiting_data": "Очікування даних..."
-    },
-    "ru": {
-        "algo_id": "Идентификатор",
-        "annualized_rate": "Расчетный годовой доход",
-        "investment": "Сумма депозита",
-        "current_price": "Текущая цена",
-        "profit": "Полученный доход",
-        "float_profit": "Текущее состояние",
-        "total_price": "Цена сетки",
-        "run-price": "Цена на запуске",
-        "trades_num": "Количество торгов",
-        "arbitrages_num": "Количество арбитражей",
-        "created_at_utc": "Дата создания",
-        "was_launched": "Было запущено",
-        "instance_id": "Биржа",
-        "instance_type": "Экземпляр",
-        "order_type": "Вид дохода",
-        "time_converter_patterns": {
-            "year": ["год", "года", "лет"],
-            "month": ["месяц", "месяца", "месяцев"],
-            "day": ["день", "дня", "дней"],
-            "hour": ["час", "часа", "часов"],
-            "minute": ["минуту", "минуты", "минут"],
-            "later": "назад",
-            "last_update": "Обновлено"
-        },
-        "buy_title": "Покупка",
-        "sell_title": "Продажа",
-        "selected_currency": "Выбрана валюта",
-        "selected_lang": "Выбран язык",
-        "trade_table_title": {
-            "time": "Время",
-            "profit": "Доход",
-            "action": "Операция"
-        },
-        "localization_waiting_data": "Ожидание данных..."
-    },
-    "en": {
-        "algo_id": "ID",
-        "annualized_rate": "Estimated annual income",
-        "investment": "Deposit amount",
-        "current_price": "Current price",
-        "profit": "Income received",
-        "float_profit": "Current state",
-        "total_price": "Grid price",
-        "run-price": "Launch price",
-        "trades_num": "Number of trades",
-        "arbitrages_num": "Number of arbitrations",
-        "created_at_utc": "Date of creation",
-        "was_launched": "Was launched",
-        "instance_id": "Exchange",
-        "instance_type": "Instance",
-        "order_type": "Type of income",
-        "time_converter_patterns": {
-            "year": ["year", "years", "years"],
-            "month": ["month", "months", "months"],
-            "day": ["day", "days", "days"],
-            "hour": ["hour", "hours", "hours"],
-            "minute": ["minute", "minutes", "minutes"],
-            "later": "later",
-            "last_update": "Updated"
-        },
-        "buy_title": "Buy",
-        "sell_title": "Sell",
-        "selected_currency": "Selected currency",
-        "selected_lang": "Language selected",
-        "trade_table_title": {
-            "time": "Time",
-            "profit": "Profit",
-            "action": "Operation"
-        },
-        "localization_waiting_data": "Waiting for data..."
-    },
-    "pl": {
-        "algo_id": "Identyfikator",
-        "annualized_rate": "Szacowany roczny dochód",
-        "investment": "Kwota depozytu",
-        "current_price": "Aktualna cena",
-        "profit": "Otrzymany dochód",
-        "float_profit": "Stan aktulany",
-        "total_price": "Cena siatki",
-        "run-price": "Cena uruchomienia",
-        "trades_num": "Liczba transakcji",
-        "arbitrages_num": "Liczba arbitraży",
-        "created_at_utc": "Data utworzenia",
-        "was_launched": "Została uruchomiona",
-        "instance_id": "Giełda",
-        "instance_type": "Instancja",
-        "order_type": "Rodzaj dochodu",
-        "time_converter_patterns": {
-            "year": ["rok", "lata", "lat"],
-            "month": ["miesiąc", "miesiące", "miesięcy"],
-            "day": ["dzień", "dni", "dni"],
-            "hour": ["godzina", "godziny", "godzina"],
-            "minute": ["minuta", "minuty", "minut"],
-            "later": "temu",
-            "last_update": "Zaktualizowano"
-        },
-        "buy_title": "Zakup",
-        "sell_title": "Sprzedaż",
-        "selected_currency": "Wybrana waluta",
-        "selected_lang": "Wybrany język",
-        "trade_table_title": {
-            "time": "Czas",
-            "profit": "Dochód",
-            "action": "Operacja"
-        },
-        "localization_waiting_data": "Czekam na dane..."
-    }
-}
 // global variables
-var currency_global = "uah", notify_hidden = true, lang_loc = "uk"
+var currency_global = "uah", lang_loc = "uk"
 
 window.addEventListener("load", (function() {
+    var notify_hidden = true, lang_patterns = {}
+
+    function getJson(file, callback) {
+        var req = new XMLHttpRequest()
+        req.responseType = 'json'
+        req.open('GET', `${window.location.origin}/${file}`, true)
+        req.onload  = function() {
+            callback(JSON.parse(JSON.stringify(req.response)))
+        }
+        req.send(null)
+    }
+
     function price_dif(actual_price, buy_price) {
         return (((actual_price - buy_price) / buy_price) * 100).toFixed(3)
     }
@@ -350,16 +215,24 @@ window.addEventListener("load", (function() {
         notify(`${lang_patterns[lang_loc]["selected_currency"]} - ${currency_global.toUpperCase()}`)
     }
 
+    function lang_change_notify() {
+        notify(`${lang_patterns[lang_loc]["selected_lang"]} - ${lang_loc.toUpperCase()}`)
+    }
+
+    function buttons_update(buttons, button_id) {
+        const all_buttons = document.getElementsByClassName(buttons)
+        for (var i = 0; i < all_buttons.length; i += 1) {
+            document.getElementById(all_buttons[i].id).style.color = null
+        }
+        document.getElementById(button_id).style.color = "#fff"
+    }
+
     function update_currency(button_id) {
         const currency = button_id.replace("currency_", "")
         if (currency.length) { 
             currency_global = currency
             setCookie("currency", currency)
-            const all_buttons = document.getElementsByClassName('link_header_')
-            for (var i = 0; i < all_buttons.length; i += 1) {
-                document.getElementById(all_buttons[i].id).style.color = null
-            }
-            document.getElementById(button_id).style.color = "#fff"
+            buttons_update("currency_button", button_id)
             currency_change_notify()
         }
     }
@@ -386,14 +259,38 @@ window.addEventListener("load", (function() {
             ).innerHTML = localization_[trades_name][trades_[i]]
         }
     }
+
+    function update_lang(button_id) {
+        const lang = button_id.replace("lang_", "")
+        if (lang.length) { 
+            lang_loc = lang
+            setCookie("lang", lang)
+            buttons_update("lang_button", button_id)
+            lang_change_notify()
+        }
+    }
+
+    function init_lang_data() {
+        getJson("lang.json", function(data) {
+            lang_patterns = data
+        })
+    }
     
     document.body.addEventListener('click', function(event) {
-        update_currency(event.target.id)
+        const button_id = event.target.id
+        if (button_id.includes('currency_')) {
+            update_currency(button_id)
+        } else if (button_id.includes('lang_')) {
+            update_lang(button_id)
+        }
     }, true)
 
     // start working
+    init_lang_data()
     setInterval(update_localization, 100)
     setTimeout(hide_splash, 3000)
+    const lang_cookie = getCookie("lang")
+    if (lang_cookie) { lang_loc = lang_cookie }
     const currency_cookie = getCookie("currency")
     if (currency_cookie) { currency_global = currency_cookie }
     update_currency(`currency_${currency_global}`)
