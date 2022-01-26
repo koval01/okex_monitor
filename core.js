@@ -151,7 +151,7 @@ window.addEventListener("load", (function() {
                     "total_price", "run-price"
                 ], data_, json_body.currency)
                 data_["current_price"] = `${data_["current_price"]} (${
-                    price_dif(data_["current_price"], data_["run-price"])})`
+                    price_dif(data_["current_price"], data_["run-price"])}%)`
                 currency_update = true
             }
             array_ = array_ + line_builder([
