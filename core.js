@@ -190,7 +190,9 @@ window.addEventListener("load", (function() {
         data = data.data
         document.title = `OkxGrid | ${currency_process(
             data.data.float_profit, data.currency
-        )} ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
+        )} (${
+            price_dif(data.data.current_price, data.data.run-price)
+        }%) | ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
         document.getElementById(
         "data_body").innerHTML = build_table(data)
         document.getElementById(
