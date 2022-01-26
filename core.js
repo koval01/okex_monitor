@@ -27,7 +27,7 @@ window.addEventListener("load", (function() {
             error_text.innerText = text
             error_box.style["margin-bottom"] = "0"
             setTimeout(function() {
-                error_box.style["margin-bottom"] = "-50px"
+                error_box.style["margin-bottom"] = "-150px"
                 notify_hidden = true
             }, 2500)
         }
@@ -270,9 +270,22 @@ window.addEventListener("load", (function() {
         }
     }
 
+    function init_other() {
+        setInterval(update_localization, 100)
+        setTimeout(hide_splash, 3000)
+        const lang_cookie = getCookie("lang")
+        if (lang_cookie) { lang_loc = lang_cookie }
+        update_lang(`lang_${lang_loc}`)
+        const currency_cookie = getCookie("currency")
+        if (currency_cookie) { currency_global = currency_cookie }
+        update_currency(`currency_${currency_global}`)
+        socket_()
+    }
+
     function init_lang_data() {
         getJson("lang.json", function(data) {
             lang_patterns = data
+            init_other()
         })
     }
     
@@ -287,12 +300,4 @@ window.addEventListener("load", (function() {
 
     // start working
     init_lang_data()
-    setInterval(update_localization, 100)
-    setTimeout(hide_splash, 3000)
-    const lang_cookie = getCookie("lang")
-    if (lang_cookie) { lang_loc = lang_cookie }
-    const currency_cookie = getCookie("currency")
-    if (currency_cookie) { currency_global = currency_cookie }
-    update_currency(`currency_${currency_global}`)
-    socket_()
 }))
