@@ -14,8 +14,10 @@ window.addEventListener("load", (function() {
         req.send(null)
     }
 
-    function price_dif(actual_price, buy_price) {
-        return (((actual_price - buy_price) / buy_price) * 100).toFixed(3)
+    function price_dif(actual_price, buy_price) -> String {
+        let result = (((actual_price - buy_price) / buy_price) * 100).toFixed(3)
+        if (result > 0) { `+${result}` }
+        return result.toString()
     }
     
     function notify(text) {
