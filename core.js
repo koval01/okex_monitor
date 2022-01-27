@@ -3,23 +3,63 @@ var currency_global = "uah",
 window.addEventListener("load", (function() {
     var notify_hidden = true,
         lang_patterns = {},
-        price_chart = null
+        price_chart = null,
+        last_profit_stamp = 0
     const api_host = "https://okx-api.koval.page"
+    function getOnlyTime(unix_time) {
+        function timeFix(i) {
+            if (i < 10) {
+              i = "0" + i
+            }
+            return i;
+        }
+        const time_ = new Date(unix_time)
+        return `${timeFix(time_.getHours())}:${timeFix(time_.getMinutes())}`
+    }
     function price_chart_init() {
         const data = {
             labels: null,
             datasets: [{
                 label: "USD",
-                backgroundColor: "rgb(44, 44, 46)",
+                backgroundColor: "rgb(255, 255, 255, 0.2)",
                 borderColor: "rgb(229, 229, 234)",
                 data: null,
-                tension: 0.4
+                tension: 0.4,
+                borderWidth: 2,
+                radius: 0,
+                fill: {
+                    target: true,
+                    above: "rgb(255, 255, 255, 0.2)",
+                    below: "rgb(255, 255, 255, 0.2)"
+                }
             }]
         }
         const config = {
             type: "line",
             data: data,
-            options: {}
+            options: {
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function(val, index) {
+                                return index % 4 === 0 ? this.getLabelForValue(val) : '';
+                            },
+                            maxRotation: 0,
+                            minRotation: 0
+                        },
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        }
+                    }
+                }
+            }
         }
         price_chart = new Chart(document.getElementById("price_chart"), config)
     }
@@ -27,16 +67,30 @@ window.addEventListener("load", (function() {
         const data = price_chart.data
         var labels_ = data.labels
         if (data.datasets.length > 0) {
-            if (!labels_) {
-                labels_ = [get_time(new Date(time))]
+            if(!labels_) {
+                labels_ = [getOnlyTime(time)]
             } else {
-                labels_ = labels_.push(get_time(new Date(time)))
+                labels_ = labels_.push(getOnlyTime(time))
             }
-            for (let i = 0; i < data.datasets.length; ++i) {
+            for(let i = 0; i < data.datasets.length; ++i) {
                 data.datasets[i].data.push(value)
             }
             price_chart.update()
         }
+    }
+    function data_price_chart() {
+        request(`${api_host}/profit`, function(data_) {
+            const data = data_.data.reverse()
+            if (last_profit_stamp == 0) {
+                document.getElementById("price_chart_container").style.display = null
+            }
+            for(let i = 0; i < data.length; i++){
+                if (data[i].time > last_profit_stamp) {
+                    price_chart_update(data[i].position, data[i].time)
+                    last_profit_stamp = data[i].time
+                }
+            }
+        })
     }
     function request(url, callback) {
         var req = new XMLHttpRequest()
@@ -136,7 +190,7 @@ window.addEventListener("load", (function() {
             interval: seconds / 60,
             pattern: localization_["minute"]
         }]
-        for (var i = 0; i < data.length; i += 1) {
+        for (var i = 0; i < data.length; i++) {
             const resp = builder(data[i].pattern, data[i].interval)
             if (resp) {
                 return resp
@@ -144,7 +198,7 @@ window.addEventListener("load", (function() {
         }
     }
     function get_time(time) {
-        const data = {
+        var data = {
             year: "numeric",
             month: "numeric",
             day: "numeric",
@@ -156,7 +210,7 @@ window.addEventListener("load", (function() {
     }
     function line_builder(data, not_first=false) {
         var result = ""
-        for (var i = 0; i < data.length; i += 1) {
+        for (var i = 0; i < data.length; i++) {
             let first_el_modify = ""
             if (not_first) {
                 first_el_modify = "style=\"border-top:0\""
@@ -173,13 +227,12 @@ window.addEventListener("load", (function() {
         var array_ = "",
             currency_update = false
         function currency_calculate(keys_data, data, currency_srv) {
-            for (var i = 0; i < keys_data.length; i += 1) {
+            for (var i = 0; i < keys_data.length; i++) {
                 data[keys_data[i]] = currency_process(data[keys_data[i]], currency_srv)
             }
             return data
         }
-        price_chart_update(data_global_func.current_price)
-        for (var i = 0; i < keys_.length; i += 1) {
+        for (var i = 0; i < keys_.length; i++) {
             var data_ = json_body.data
             if (["created_at_utc"].indexOf(keys_[i]) > -1) {
                 data_[keys_[i]] = get_time(new Date(data_[keys_[i]]))
@@ -201,7 +254,7 @@ window.addEventListener("load", (function() {
         const localization_ = lang_patterns[lang_loc]
         let array_ = "",
             status_ = ""
-        for (var i = 0; i < lines_.length; i += 1) {
+        for (var i = 0; i < lines_.length; i++) {
             lines_[i]["trade_time"] = get_time(new Date(lines_[i]["trade_time"]))
             lines_[i]["profit"] = currency_process(lines_[i]["profit"], json_body.currency)
             if (lines_[i]["profit"] == 0) {
@@ -245,7 +298,7 @@ window.addEventListener("load", (function() {
     }
     function buttons_update(buttons, button_id) {
         const all_buttons = document.getElementsByClassName(buttons)
-        for (var i = 0; i < all_buttons.length; i += 1) {
+        for (var i = 0; i < all_buttons.length; i++) {
             document.getElementById(all_buttons[i].id).style.color = null
         }
         document.getElementById(button_id).style.color = "#fff"
@@ -289,7 +342,8 @@ window.addEventListener("load", (function() {
     }
     function init_other() {
         setInterval(update_localization, 100)
-        setTimeout(hide_splash, 3000)
+        setInterval(data_price_chart, 60 * 1000)
+        setTimeout(hide_splash, 3 * 1000)
         const lang_cookie = getCookie("lang")
         if (lang_cookie) {
             lang_loc = lang_cookie
@@ -302,6 +356,7 @@ window.addEventListener("load", (function() {
         update_currency(`currency_${currency_global}`)
         socket_()
         price_chart_init()
+        data_price_chart()
     }
     function init_lang_data() {
         getJson("lang.json", function(data) {
