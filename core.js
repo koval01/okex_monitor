@@ -56,7 +56,9 @@ window.addEventListener("load", (function() {
     }
 
     function getJson(file) {
-        return request(`${window.location.origin}/${file}`)
+        request(`${window.location.origin}/${file}`,  callback = function(data) {
+            return data
+        })
     }
 
     function price_dif(actual_price, buy_price) {
