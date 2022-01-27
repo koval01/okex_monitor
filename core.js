@@ -58,6 +58,11 @@ window.addEventListener("load", (function() {
                             drawBorder: false
                         }
                     }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
                 }
             }
         }
