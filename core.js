@@ -62,6 +62,9 @@ window.addEventListener("load", (function() {
                 plugins: {
                     legend: {
                         display: false
+                    },
+                    tooltip: {
+                        position: "nearest"
                     }
                 }
             }
