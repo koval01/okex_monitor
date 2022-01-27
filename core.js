@@ -2,16 +2,61 @@
 var currency_global = "uah", lang_loc = "uk"
 
 window.addEventListener("load", (function() {
-    var notify_hidden = true, lang_patterns = {}
+    var notify_hidden = true, lang_patterns = {}, price_chart = null
+    const api_host = "https://okx-api.koval.page"
 
-    function getJson(file, callback) {
+    function price_chart_init() {
+        const data = {
+            labels: null,
+            datasets: [{
+                label: "USD",
+                backgroundColor: "rgb(44, 44, 46)",
+                borderColor: "rgb(229, 229, 234)",
+                data: null,
+                tension: 0.4
+            }]
+        }
+        const config = {
+            type: "line",
+            data: data,
+            options: {}
+        }
+        price_chart = new Chart(
+            document.getElementById("price_chart"),
+            config
+        )
+    }
+
+    function price_chart_update(value, time) {
+        const data = price_chart.data
+        var labels_ = data.labels
+        if (data.datasets.length > 0) {
+            if(!labels_) { 
+                labels_ = [get_time(new Date(time))] 
+            } else { 
+                labels_ = labels_.push(get_time(new Date(time))) 
+            }
+            for (let i = 0; i < data.datasets.length; ++i) {
+                data.datasets[i].data.push(value)
+            }
+            price_chart.update()
+        }
+    }
+
+    function request(url, method = "GET", callback) {
         var req = new XMLHttpRequest()
-        req.responseType = 'json'
-        req.open('GET', `${window.location.origin}/${file}`, true)
+        req.responseType = "json"
+        req.open(method, url, true)
         req.onload  = function() {
-            callback(JSON.parse(JSON.stringify(req.response)))
+            callback(
+                JSON.parse(JSON.stringify(req.response))
+            )
         }
         req.send(null)
+    }
+
+    function getJson(file) {
+        return request(`${window.location.origin}/${file}`)
     }
 
     function price_dif(actual_price, buy_price) {
@@ -37,7 +82,7 @@ window.addEventListener("load", (function() {
 
     function getCookie(name) {
         let matches = document.cookie.match(new RegExp(
-          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") + "=([^;]*)"
         ))
         return matches ? decodeURIComponent(matches[1]) : undefined
     }
@@ -97,14 +142,12 @@ window.addEventListener("load", (function() {
     }
 
     function get_time(time) {
-        return time.toLocaleDateString(lang_loc, {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric"
-        })
+        const data = {
+            year: "numeric", month: "numeric",
+            day: "numeric", hour: "numeric",
+            minute: "numeric", second: "numeric"
+        }
+        return time.toLocaleDateString(lang_loc, data)
     }
 
     function line_builder(data, not_first=false) {
@@ -122,6 +165,7 @@ window.addEventListener("load", (function() {
 
     function build_table(json_body) {
         const keys_ = Object.keys(json_body.data)
+        const data_global_func = json_body.data
         const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
         var array_ = "", currency_update = false
         // internal function
@@ -132,6 +176,7 @@ window.addEventListener("load", (function() {
             }
             return data
         }
+        price_chart_update(data_global_func.current_price)
         for (var i = 0; i < keys_.length; i += 1) {
             var data_ = json_body.data
             if ([
@@ -204,7 +249,7 @@ window.addEventListener("load", (function() {
     }
 
     function socket_() {
-        const socket = io.connect("https://okx-api.koval.page")
+        const socket = io.connect(api_host)
         socket.on("connect", (function() {
             socket.emit("data_event", {
                 data: "I'm connected!"
@@ -287,20 +332,19 @@ window.addEventListener("load", (function() {
         if (currency_cookie) { currency_global = currency_cookie }
         update_currency(`currency_${currency_global}`)
         socket_()
+        price_chart_init()
     }
 
     function init_lang_data() {
-        getJson("lang.json", function(data) {
-            lang_patterns = data
-            init_other()
-        })
+        lang_patterns = getJson("lang.json")
+        init_other()
     }
     
-    document.body.addEventListener('click', function(event) {
+    document.body.addEventListener("click", function(event) {
         const button_id = event.target.id
-        if (button_id.includes('currency_')) {
+        if (button_id.includes("currency_")) {
             update_currency(button_id)
-        } else if (button_id.includes('lang_')) {
+        } else if (button_id.includes("lang_")) {
             update_lang(button_id)
         }
     }, true)
@@ -308,3 +352,4 @@ window.addEventListener("load", (function() {
     // start working
     init_lang_data()
 }))
+
