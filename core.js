@@ -303,7 +303,7 @@ window.addEventListener("load", (function () {
     function build_spot_buttons(data) {
         result = ""
         for (var i = 0; i < data; i++) {
-            result = result + `<li class="header-menu-item"><a class="link_header_ spot_select_button" id="spot_selectr_${i}">${i}</a></li>`
+            result = result + `<li class="header-menu-item"><a class="link_header_ spot_select_button" id="spot_selectr_${i}">${parseInt(i)+1}</a></li>`
         }
         if (result.length) { spot_s_btn_loaded = true, setTimeout(clearInterval(spot_button_wait_intrvl), 400) }
         return result
