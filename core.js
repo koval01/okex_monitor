@@ -292,8 +292,10 @@ window.addEventListener("load", (function () {
         spot_selectio_buttons(orig_data.buttons_ids)
         spots_data_global = update_spots_data_gl(orig_data.spot)
         data = orig_data.spot[selected_spot_global]
-        document.title = `OkxGrid | ${currency_process(data.data.float_profit, orig_data.currency)} (${price_dif(data.data.current_price, data.data["run-price"])
-            }%) | ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
+        document.title = `OkxGrid | ${spots_data_global[selected_spot_global]} | ${
+            currency_process(data.data.float_profit, orig_data.currency)} (${
+                price_dif(data.data.current_price, data.data["run-price"])}%) | ${
+                    currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
         document.getElementById("data_body").innerHTML = build_table(data, orig_data)
         document.getElementById("trade_body").innerHTML = build_trades_table(data, orig_data)
         document.getElementById("last_update_stamp").innerHTML = `${localization_["last_update"]}: ${get_time(new Date())}`
