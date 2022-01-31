@@ -199,16 +199,16 @@ li {
 }
 @-webkit-keyframes splash_scroll {
   16%  {margin-top: 0px}
-  32%  {margin-top: -50px}
+  35%  {margin-top: -50px}
   100%  {margin-top: -50px}
 }
 @-moz-keyframes splash_scroll {
   16%  {margin-top: 0px}
-  32%  {margin-top: -50px}
+  35%  {margin-top: -50px}
   100%  {margin-top: -50px}
 }
 @keyframes splash_scroll {
   16%  {margin-top: 0px}
-  32%  {margin-top: -50px}
+  35%  {margin-top: -50px}
   100%  {margin-top: -50px}
 }
