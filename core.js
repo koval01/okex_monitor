@@ -1,7 +1,7 @@
 var currency_global = "uah",
     lang_loc = "uk",
     selected_spot_global = 0
-window.addEventListener("load", (function() {
+window.addEventListener("load", (function () {
     var notify_hidden = true,
         lang_patterns = {},
         price_chart = null,
@@ -10,9 +10,9 @@ window.addEventListener("load", (function() {
     function getOnlyTime(unix_time) {
         function timeFix(i) {
             if (i < 10) {
-              i = "0" + i
+                i = "0" + i
             }
-            return i;
+            return i
         }
         const time_ = new Date(unix_time)
         return `${timeFix(time_.getHours())}:${timeFix(time_.getMinutes())}`
@@ -42,8 +42,8 @@ window.addEventListener("load", (function() {
                 scales: {
                     x: {
                         ticks: {
-                            callback: function(val, index) {
-                                return index % 4 === 0 ? this.getLabelForValue(val) : '';
+                            callback: function (val, index) {
+                                return index % 4 === 0 ? this.getLabelForValue(val) : ''
                             },
                             maxRotation: 0,
                             minRotation: 0
@@ -76,24 +76,24 @@ window.addEventListener("load", (function() {
         const data = price_chart.data
         var labels_ = data.labels
         if (data.datasets.length > 0) {
-            if(!labels_) {
+            if (!labels_) {
                 labels_ = [getOnlyTime(time)]
             } else {
                 labels_ = labels_.push(getOnlyTime(time))
             }
-            for(let i = 0; i < data.datasets.length; ++i) {
+            for (let i = 0; i < data.datasets.length; ++i) {
                 data.datasets[i].data.push(value)
             }
             price_chart.update()
         }
     }
     function data_price_chart() {
-        request(`${api_host}/profit?index=${selected_spot_global}`, function(data_) {
+        request(`${api_host}/profit?index=${selected_spot_global}`, function (data_) {
             const data = data_.data.reverse()
             if (last_profit_stamp == 0) {
                 document.getElementById("price_chart_container").style.display = null
             }
-            for(let i = 0; i < data.length; i++){
+            for (let i = 0; i < data.length; i++) {
                 if (data[i].time > last_profit_stamp) {
                     price_chart_update(data[i].position, data[i].time)
                     last_profit_stamp = data[i].time
@@ -105,13 +105,13 @@ window.addEventListener("load", (function() {
         var req = new XMLHttpRequest()
         req.responseType = "json"
         req.open("GET", url, true)
-        req.onload = function() {
+        req.onload = function () {
             callback(JSON.parse(JSON.stringify(req.response)))
         }
         req.send(null)
     }
     function getJson(file, callback) {
-        request(`${window.location.origin}/${file}`, function(data) {
+        request(`${window.location.origin}/${file}`, function (data) {
             callback(data)
         })
     }
@@ -129,7 +129,7 @@ window.addEventListener("load", (function() {
             notify_hidden = false
             error_text.innerText = text
             error_box.style["margin-bottom"] = "0"
-            setTimeout(function() {
+            setTimeout(function () {
                 error_box.style["margin-bottom"] = "-150px"
                 notify_hidden = true
             }, 2500)
@@ -139,7 +139,7 @@ window.addEventListener("load", (function() {
         let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") + "=([^;]*)"))
         return matches ? decodeURIComponent(matches[1]) : undefined
     }
-    function setCookie(name, value, options={}) {
+    function setCookie(name, value, options = {}) {
         if (options.expires instanceof Date) {
             options.expires = options.expires.toUTCString()
         }
@@ -217,7 +217,7 @@ window.addEventListener("load", (function() {
         }
         return time.toLocaleDateString(lang_loc, data)
     }
-    function line_builder(data, not_first=false) {
+    function line_builder(data, not_first = false) {
         var result = ""
         for (var i = 0; i < data.length; i++) {
             let first_el_modify = ""
@@ -278,21 +278,21 @@ window.addEventListener("load", (function() {
     }
     function update_data(data) {
         const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
-        data = data[selected_spot_global].data
+        data = data.data[selected_spot_global]
         document.title = `OkxGrid | ${currency_process(data.data.float_profit, data.currency)} (${price_dif(data.data.current_price, data.data["run-price"])
-        }%) | ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
+            }%) | ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
         document.getElementById("data_body").innerHTML = build_table(data)
         document.getElementById("trade_body").innerHTML = build_trades_table(data)
         document.getElementById("last_update_stamp").innerHTML = `${localization_["last_update"]}: ${get_time(new Date())}`
     }
     function socket_() {
         const socket = io.connect(api_host)
-        socket.on("connect", (function() {
+        socket.on("connect", (function () {
             socket.emit("data_event", {
                 data: "I'm connected!"
             })
         }))
-        socket.on("message", (function(msg) {
+        socket.on("message", (function (msg) {
             if (msg.data == "Connected" || msg.data == "I'm connected!") {
                 return
             }
@@ -334,7 +334,7 @@ window.addEventListener("load", (function() {
             let pattern_ = `localization_waiting_data_${wait_[i]}`
             try {
                 document.getElementById(pattern_).innerHTML = localization_["localization_waiting_data"]
-            } catch {}
+            } catch { }
         }
         for (const i in trades_) {
             document.getElementById(`${trades_name}_${trades_[i]}`).innerHTML = localization_[trades_name][trades_[i]]
@@ -368,12 +368,12 @@ window.addEventListener("load", (function() {
         data_price_chart()
     }
     function init_lang_data() {
-        getJson("lang.json", function(data) {
+        getJson("lang.json", function (data) {
             lang_patterns = data
             init_other()
         })
     }
-    document.body.addEventListener("click", function(event) {
+    document.body.addEventListener("click", function (event) {
         const button_id = event.target.id
         if (button_id.includes("currency_")) {
             update_currency(button_id)
