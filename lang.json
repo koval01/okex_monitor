@@ -28,6 +28,7 @@
         "sell_title": "Продаж",
         "selected_currency": "Обрано валюту",
         "selected_lang": "Обрано мову",
+        "selected_spot_": "Обрано спот",
         "trade_table_title": {
             "time": "Час",
             "profit": "Дохід",
@@ -64,6 +65,7 @@
         "sell_title": "Продажа",
         "selected_currency": "Выбрана валюта",
         "selected_lang": "Выбран язык",
+        "selected_spot_": "Выбран спот",
         "trade_table_title": {
             "time": "Время",
             "profit": "Доход",
@@ -100,6 +102,7 @@
         "sell_title": "Sell",
         "selected_currency": "Selected currency",
         "selected_lang": "Language selected",
+        "selected_spot_": "Selected spot",
         "trade_table_title": {
             "time": "Time",
             "profit": "Profit",
@@ -136,6 +139,7 @@
         "sell_title": "Sprzedaż",
         "selected_currency": "Wybrana waluta",
         "selected_lang": "Wybrany język",
+        "selected_spot_": "Wybrane miejsce",
         "trade_table_title": {
             "time": "Czas",
             "profit": "Dochód",
