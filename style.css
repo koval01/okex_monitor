@@ -198,17 +198,17 @@ li {
   animation-fill-mode: forwards;
 }
 @-webkit-keyframes splash_scroll {
-  12%  {margin-top: 0px}
-  25%  {margin-top: -50px}
+  16%  {margin-top: 0px}
+  32%  {margin-top: -50px}
   100%  {margin-top: -50px}
 }
 @-moz-keyframes splash_scroll {
-  12%  {margin-top: 0px}
-  25%  {margin-top: -50px}
+  16%  {margin-top: 0px}
+  32%  {margin-top: -50px}
   100%  {margin-top: -50px}
 }
 @keyframes splash_scroll {
-  12%  {margin-top: 0px}
-  25%  {margin-top: -50px}
+  16%  {margin-top: 0px}
+  32%  {margin-top: -50px}
   100%  {margin-top: -50px}
 }
