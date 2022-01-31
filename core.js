@@ -277,12 +277,19 @@ window.addEventListener("load", (function () {
         }
         return array_
     }
+    function update_spots_data_gl(data) {
+        result = []
+        for (var i = 0; i < data.length; i++) {
+            result = result.push(data[i].instance_id)
+        }
+        return result
+    }
     function update_data(data) {
         const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
         const orig_data = data.data
         spot_selectio_buttons(orig_data.buttons_ids)
+        spots_data_global = update_spots_data_gl(orig_data.spot)
         data = orig_data.spot[selected_spot_global]
-        spots_data_global = data.instance_id
         document.title = `OkxGrid | ${currency_process(data.data.float_profit, orig_data.currency)} (${price_dif(data.data.current_price, data.data["run-price"])
             }%) | ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
         document.getElementById("data_body").innerHTML = build_table(data, orig_data)
