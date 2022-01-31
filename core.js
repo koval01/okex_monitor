@@ -5,7 +5,8 @@ window.addEventListener("load", (function () {
     var notify_hidden = true,
         lang_patterns = {},
         price_chart = null,
-        last_profit_stamp = 0
+        last_profit_stamp = 0,
+        spots_data_global = []
     const api_host = "https://okx-api.koval.page"
     function getOnlyTime(unix_time) {
         function timeFix(i) {
@@ -281,6 +282,7 @@ window.addEventListener("load", (function () {
         const orig_data = data.data
         spot_selectio_buttons(orig_data.buttons_ids)
         data = orig_data.spot[selected_spot_global]
+        spots_data_global = data.instance_id
         document.title = `OkxGrid | ${currency_process(data.data.float_profit, orig_data.currency)} (${price_dif(data.data.current_price, data.data["run-price"])
             }%) | ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
         document.getElementById("data_body").innerHTML = build_table(data, orig_data)
@@ -311,11 +313,8 @@ window.addEventListener("load", (function () {
             update_data(msg)
         }))
     }
-    function currency_change_notify() {
-        notify(`${lang_patterns[lang_loc]["selected_currency"]} - ${currency_global.toUpperCase()}`)
-    }
-    function lang_change_notify() {
-        notify(`${lang_patterns[lang_loc]["selected_lang"]} - ${lang_loc.toUpperCase()}`)
+    function update_notify(pattern, data) {
+        notify(`${pattern} - ${data}`)
     }
     function buttons_update(buttons, button_id) {
         const all_buttons = document.getElementsByClassName(buttons)
@@ -330,7 +329,7 @@ window.addEventListener("load", (function () {
             currency_global = currency
             setCookie("currency", currency)
             buttons_update("currency_button", button_id)
-            currency_change_notify()
+            update_notify(lang_patterns[lang_loc]["selected_currency"], currency_global.toUpperCase())
         }
     }
     function hide_splash() {
@@ -358,16 +357,22 @@ window.addEventListener("load", (function () {
             lang_loc = lang
             setCookie("lang", lang)
             buttons_update("lang_button", button_id)
-            lang_change_notify()
+            update_notify(lang_patterns[lang_loc]["selected_lang"], lang_loc.toUpperCase())
         }
     }
     function update_spot_(button_id) {
-        selected_spot_global = parseInt(button_id.replace("spot_selectr_", ""))
+        data = parseInt(button_id.replace("spot_selectr_", ""))
+        if (data.length) {
+            selected_spot_global = data
+            setCookie("s_spot", data)
+            buttons_update("spot_select_button", button_id)
+            update_notify(lang_patterns[lang_loc]["selected_spot_"], spots_data_global[data])
+        }
     }
     function init_other() {
         setInterval(update_localization, 100)
         setInterval(data_price_chart, 60 * 1000)
-        setTimeout(hide_splash, 3 * 1000)
+        setTimeout(hide_splash, 4 * 1000 + 250)
         const lang_cookie = getCookie("lang")
         if (lang_cookie) {
             lang_loc = lang_cookie
