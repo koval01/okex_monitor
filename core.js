@@ -362,7 +362,7 @@ window.addEventListener("load", (function () {
     }
     function update_spot_(button_id) {
         data = parseInt(button_id.replace("spot_selectr_", ""))
-        if (data.length) {
+        if (data.toString().length) {
             selected_spot_global = data
             setCookie("s_spot", data)
             buttons_update("spot_select_button", button_id)
