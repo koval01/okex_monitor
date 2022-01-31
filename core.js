@@ -88,7 +88,7 @@ window.addEventListener("load", (function() {
         }
     }
     function data_price_chart() {
-        request(`${api_host}/profit`, function(data_) {
+        request(`${api_host}/profit?index=${selected_spot_global}`, function(data_) {
             const data = data_.data.reverse()
             if (last_profit_stamp == 0) {
                 document.getElementById("price_chart_container").style.display = null
