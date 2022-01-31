@@ -20,9 +20,9 @@
             "month": ["місяць", "місяці", "місяців"],
             "day": ["день", "дні", "днів"],
             "hour": ["годину", "години", "годин"],
+            "minute": ["хвилину", "хвилини", "хвилин"],
             "later": "тому",
-            "last_update": "Оновлено",
-            "less_hour_ago": "менше години"
+            "last_update": "Оновлено"
         },
         "buy_title": "Купівля",
         "sell_title": "Продаж",
@@ -56,9 +56,9 @@
             "month": ["месяц", "месяца", "месяцев"],
             "day": ["день", "дня", "дней"],
             "hour": ["час", "часа", "часов"],
+            "minute": ["минуту", "минуты", "минут"],
             "later": "назад",
-            "last_update": "Обновлено",
-            "less_hour_ago": "меньше часа"
+            "last_update": "Обновлено"
         },
         "buy_title": "Покупка",
         "sell_title": "Продажа",
@@ -92,9 +92,9 @@
             "month": ["month", "months", "months"],
             "day": ["day", "days", "days"],
             "hour": ["hour", "hours", "hours"],
+            "minute": ["minute", "minutes", "minutes"],
             "later": "later",
-            "last_update": "Updated",
-            "less_hour_ago": "less than an hour"
+            "last_update": "Updated"
         },
         "buy_title": "Buy",
         "sell_title": "Sell",
@@ -128,9 +128,9 @@
             "month": ["miesiąc", "miesiące", "miesięcy"],
             "day": ["dzień", "dni", "dni"],
             "hour": ["godzina", "godziny", "godzina"],
+            "minute": ["minuta", "minuty", "minut"],
             "later": "temu",
-            "last_update": "Zaktualizowano",
-            "less_hour_ago": "niecałą godzinę"
+            "last_update": "Zaktualizowano"
         },
         "buy_title": "Zakup",
         "sell_title": "Sprzedaż",
