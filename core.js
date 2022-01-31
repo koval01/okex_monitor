@@ -229,7 +229,7 @@ window.addEventListener("load", (function () {
         }
         return result
     }
-    function build_table(json_body) {
+    function build_table(json_body, orig_data) {
         const keys_ = Object.keys(json_body.data)
         const data_global_func = json_body.data
         const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
@@ -250,7 +250,7 @@ window.addEventListener("load", (function () {
                 data_[keys_[i]] = `${timeAgoConvert(data_[keys_[i]])} ${localization_["later"]}`
             }
             if (!currency_update) {
-                data_ = currency_calculate(["annualized_rate", "profit", "current_price", "float_profit", "total_price", "run-price"], data_, json_body.currency)
+                data_ = currency_calculate(["annualized_rate", "profit", "current_price", "float_profit", "total_price", "run-price"], data_, orig_data.currency)
                 data_["current_price"] = `${data_["current_price"]} (${price_dif(data_["current_price"], data_["run-price"])}%)`
                 currency_update = true
             }
@@ -258,14 +258,14 @@ window.addEventListener("load", (function () {
         }
         return array_
     }
-    function build_trades_table(json_body) {
+    function build_trades_table(json_body, orig_data) {
         const lines_ = json_body.trades
         const localization_ = lang_patterns[lang_loc]
         let array_ = "",
             status_ = ""
         for (var i = 0; i < lines_.length; i++) {
             lines_[i]["trade_time"] = get_time(new Date(lines_[i]["trade_time"]))
-            lines_[i]["profit"] = currency_process(lines_[i]["profit"], json_body.currency)
+            lines_[i]["profit"] = currency_process(lines_[i]["profit"], orig_data.currency)
             if (lines_[i]["profit"] == 0) {
                 lines_[i]["profit"] = "-"
                 status_ = localization_["buy_title"]
@@ -278,11 +278,12 @@ window.addEventListener("load", (function () {
     }
     function update_data(data) {
         const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
-        data = data.data[selected_spot_global]
-        document.title = `OkxGrid | ${currency_process(data.data.float_profit, data.currency)} (${price_dif(data.data.current_price, data.data["run-price"])
+        const orig_data = data.data
+        data = orig_data.spot[selected_spot_global]
+        document.title = `OkxGrid | ${currency_process(data.data.float_profit, orig_data.currency)} (${price_dif(data.data.current_price, data.data["run-price"])
             }%) | ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
-        document.getElementById("data_body").innerHTML = build_table(data)
-        document.getElementById("trade_body").innerHTML = build_trades_table(data)
+        document.getElementById("data_body").innerHTML = build_table(data, orig_data)
+        document.getElementById("trade_body").innerHTML = build_trades_table(data, orig_data)
         document.getElementById("last_update_stamp").innerHTML = `${localization_["last_update"]}: ${get_time(new Date())}`
     }
     function socket_() {
