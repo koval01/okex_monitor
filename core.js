@@ -6,7 +6,9 @@ window.addEventListener("load", (function () {
         lang_patterns = {},
         price_chart = null,
         last_profit_stamp = 0,
-        spots_data_global = []
+        spots_data_global = [],
+        spot_s_btn_loaded = false,
+        spot_button_wait_intrvl = null
     const api_host = "https://okx-api.koval.page"
     function getOnlyTime(unix_time) {
         function timeFix(i) {
@@ -280,7 +282,7 @@ window.addEventListener("load", (function () {
     function update_spots_data_gl(data) {
         result = []
         for (var i = 0; i < data.length; i++) {
-            result.push(data[i].instance_id)
+            result.push(data[i].data.instance_id)
         }
         return result
     }
@@ -301,6 +303,7 @@ window.addEventListener("load", (function () {
         for (var i = 0; i < data; i++) {
             result = result + `<li class="header-menu-item"><a class="link_header_ spot_select_button" id="spot_selectr_${i}">${i}</a></li>`
         }
+        if (result.length) { spot_s_btn_loaded = true, setTimeout(clearInterval(spot_button_wait_intrvl), 400) }
         return result
     }
     function spot_selectio_buttons(buttons_ids) {
@@ -390,11 +393,15 @@ window.addEventListener("load", (function () {
             currency_global = currency_cookie
         }
         update_currency(`currency_${currency_global}`)
-        const spot_id_cookie = getCookie("s_spot")
-        if (spot_id_cookie) {
-            selected_spot_global = spot_id_cookie
-        }
-        update_spot_(`spot_selectr_${spot_id_cookie}`)
+        spot_button_wait_intrvl = setInterval(function() {
+            if (spot_s_btn_loaded) {
+                const spot_id_cookie = getCookie("s_spot")
+                if (spot_id_cookie) {
+                    selected_spot_global = spot_id_cookie
+                }
+                update_spot_(`spot_selectr_${spot_id_cookie}`)
+            }
+        }, 100)
         socket_()
         price_chart_init()
         data_price_chart()
