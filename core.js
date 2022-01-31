@@ -279,12 +279,23 @@ window.addEventListener("load", (function () {
     function update_data(data) {
         const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
         const orig_data = data.data
+        spot_selectio_buttons(orig_data.buttons_ids)
         data = orig_data.spot[selected_spot_global]
         document.title = `OkxGrid | ${currency_process(data.data.float_profit, orig_data.currency)} (${price_dif(data.data.current_price, data.data["run-price"])
             }%) | ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
         document.getElementById("data_body").innerHTML = build_table(data, orig_data)
         document.getElementById("trade_body").innerHTML = build_trades_table(data, orig_data)
         document.getElementById("last_update_stamp").innerHTML = `${localization_["last_update"]}: ${get_time(new Date())}`
+    }
+    function build_spot_buttons(data) {
+        result = ""
+        for (var i = 0; i < data; i++) {
+            result = result + `<li class="header-menu-item"><a class="link_header_ spot_select_button" id="spot_selectr_${i}">${i}</a></li>`
+        }
+        return result
+    }
+    function spot_selectio_buttons(buttons_ids) {
+        document.getElementById("spot_selector_buttons").innerHTML = build_spot_buttons(buttons_ids)
     }
     function socket_() {
         const socket = io.connect(api_host)
@@ -350,6 +361,9 @@ window.addEventListener("load", (function () {
             lang_change_notify()
         }
     }
+    function update_spot_(button_id) {
+        selected_spot_global = parseInt(button_id.replace("spot_selectr_", ""))
+    }
     function init_other() {
         setInterval(update_localization, 100)
         setInterval(data_price_chart, 60 * 1000)
@@ -380,6 +394,8 @@ window.addEventListener("load", (function () {
             update_currency(button_id)
         } else if (button_id.includes("lang_")) {
             update_lang(button_id)
+        } else if (button_id.includes("spot_selectr_")) {
+            update_spot_(button_id)
         }
     }, true)
     init_lang_data()
