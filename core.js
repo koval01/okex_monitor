@@ -1,5 +1,6 @@
 var currency_global = "uah",
-    lang_loc = "uk"
+    lang_loc = "uk",
+    selected_spot_global = 0
 window.addEventListener("load", (function() {
     var notify_hidden = true,
         lang_patterns = {},
@@ -277,7 +278,7 @@ window.addEventListener("load", (function() {
     }
     function update_data(data) {
         const localization_ = lang_patterns[lang_loc]["time_converter_patterns"]
-        data = data.data
+        data = data[selected_spot_global].data
         document.title = `OkxGrid | ${currency_process(data.data.float_profit, data.currency)} (${price_dif(data.data.current_price, data.data["run-price"])
         }%) | ${currency_global.toUpperCase()} | ${lang_loc.toUpperCase()}`
         document.getElementById("data_body").innerHTML = build_table(data)
