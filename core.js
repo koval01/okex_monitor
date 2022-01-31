@@ -280,7 +280,7 @@ window.addEventListener("load", (function () {
     function update_spots_data_gl(data) {
         result = []
         for (var i = 0; i < data.length; i++) {
-            result = result.push(data[i].instance_id)
+            result.push(data[i].instance_id)
         }
         return result
     }
