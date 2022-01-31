@@ -390,6 +390,11 @@ window.addEventListener("load", (function () {
             currency_global = currency_cookie
         }
         update_currency(`currency_${currency_global}`)
+        const spot_id_cookie = getCookie("s_spot")
+        if (spot_id_cookie) {
+            selected_spot_global = spot_id_cookie
+        }
+        update_spot_(`spot_selectr_${spot_id_cookie}`)
         socket_()
         price_chart_init()
         data_price_chart()
