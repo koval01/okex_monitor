@@ -9,7 +9,7 @@ window.addEventListener("load", (function () {
         spots_data_global = [],
         spot_s_btn_loaded = false,
         spot_button_wait_intrvl = null
-    const api_host = "https://okx-api.koval.page"
+    const api_host = "https://okx.herokuapp.com"
     function getOnlyTime(unix_time) {
         function timeFix(i) {
             if (i < 10) {
